@@ -81,6 +81,14 @@ export const business = {
    */
   rating: null as null | { value: number; count: number },
 
+  /**
+   * Estimate form delivery. The site is hosted on Vercel, which has no built-in forms,
+   * so submissions go to Formspree (free tier: 50/month) and Formspree emails them.
+   * TODO: create a form at formspree.io with suncityroofing123@gmail.com and paste its
+   * endpoint here. While empty, the form is replaced by a call/text box so no lead is lost.
+   */
+  formEndpoint: '', // e.g. 'https://formspree.io/f/abcdwxyz'
+
   // TODO: GA4 measurement ID (G-XXXXXXX). Analytics + tel-click tracking load only when set.
   ga4Id: '',
 

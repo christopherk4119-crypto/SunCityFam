@@ -12,7 +12,8 @@ Most fixes are a single value in `src/config/business.ts`.
 |---|------|-------|-------|
 | 1 | **Photos for hail, cedar, metal, gutters** | see "Photos" below | 20 real photos are live (roof replacement, repair, exterior renovation). Hail page now uses a finished roof; it still needs **one photo of actual hail damage** (bruised shingle, dented vent). Cedar shake, metal and gutters have no photo yet. Those pages show branded placeholders. |
 | 2 | **Licensed & insured** | `business.ts` → `licensedInsured`, `licensedInsuredDetail` | Currently `false`, so "Licensed & Insured" is **hidden everywhere**. Flip to `true` only when WCB Alberta clearance + liability coverage can be shown. |
-| 3 | **Netlify form notifications** | Netlify dashboard → Forms → Form notifications | Send to **suncityroofing123@gmail.com**. Then submit a real test from the live site and confirm the email arrives (it can't be tested before deploy). |
+| 3 | **Estimate form endpoint** | `business.ts` → `formEndpoint` | Hosting is Vercel (no built-in forms). Create a free Formspree form with **suncityroofing123@gmail.com**, paste the endpoint. Until then, every form spot shows a call/text box. Submit a real test after launch. |
+| 5 | **Point the domain at Vercel** | Landingsite DNS + Vercel → Domains | See README → Deploy. Don't cancel Landingsite until you know who holds the domain registration. |
 | 4 | **Owner copy review** | All service pages | The service pages describe a process: tear-off to deck, ice & water at eaves/valleys, protecting landscaping, OSB re-sheeting on cedar, delivery planning on out-of-town jobs. That's standard good practice, but **Chris must confirm it matches what he actually does.** Don't publish process claims that aren't true. |
 
 ## 🟠 Claims to confirm (currently on the site)

@@ -26,6 +26,7 @@ Toggles you'll likely touch:
 | `licensedInsured` | `true` shows "Licensed & Insured" in the hero, trust bar and Why Choose Us. Leave `false` until it can be proven. |
 | `rating` | `{ value, count }` shows "★ X.X on Google · N reviews" and outputs AggregateRating schema. `null` hides both. |
 | `social.googleReviewsUrl` / `googleWriteReviewUrl` | Shows the review buttons. |
+| `formEndpoint` | Formspree endpoint for the estimate form. Empty = call/text box instead of the form. |
 | `ga4Id` | Loads GA4 and tracks tel/sms clicks + the thank-you conversion. |
 | `serviceAreas` | Towns list (footer, schema `areaServed`, service-area pages). |
 
@@ -77,16 +78,17 @@ Astro converts photos to WebP (1600px + 800px), lazy-loads everything except the
 
 Where photos show up automatically: service cards, service-page hero + project strip, gallery (with service filter), town pages, home page. Until a service has a photo, it shows a red/white branded placeholder. **Never use stock photos in their place.**
 
-## Deploy to Netlify
+## Deploy (Vercel)
 
-1. Push this repo to GitHub.
-2. Netlify → **Add new site → Import from Git** → pick the repo. Build settings come from `netlify.toml` (`npm run build`, publish `dist`).
-3. **Domain:** Site settings → Domain management → add `suncityroofinglethbridge.net` (keep this domain; it holds the existing rankings). Enable HTTPS.
-4. **Form notifications:** Forms → `estimate` → Settings → Form notifications → Email → `suncityroofing123@gmail.com`. Submit a test from the live site.
-5. **Redirects:** `public/_redirects` is applied automatically. Add a 301 for every old URL that no longer exists.
-6. Submit `/sitemap-index.xml` in Google Search Console.
+1. Vercel → Add New → Project → import this GitHub repo. Framework auto-detects as Astro (`vercel.json` sets build `npm run build`, output `dist`, trailing slashes, redirects and cache headers).
+2. **Domains:** add `suncityroofinglethbridge.net` **and** `www.suncityroofinglethbridge.net`. Pick one as primary; Vercel redirects the other.
+3. **DNS** (at whoever hosts the domain's DNS, currently Landingsite):
+   - `A` record, name `@` → the IP Vercel shows (e.g. `216.198.79.1`). **Delete the old A records.**
+   - `CNAME` record, name `www` → the `…vercel-dns-0xx.com` value Vercel shows. **Delete the old www CNAME.**
+4. **Form:** create a free form at formspree.io with `suncityroofing123@gmail.com`, paste the endpoint into `business.formEndpoint` in `src/config/business.ts`, push. Until then the form is replaced by a call/text box. Submit a real test after launch.
+5. Submit `/sitemap-index.xml` in Google Search Console.
 
-**Cloudflare Pages:** also works (build `npm run build`, output `dist`, `_redirects` supported), but Netlify Forms won't. Set `FORMSPREE_ENDPOINT` in `src/components/EstimateForm.astro` to use Formspree instead.
+`public/_redirects` / `netlify.toml` are kept so the site can also be deployed on Netlify; Vercel ignores them and uses `vercel.json`.
 
 ## What's where
 
