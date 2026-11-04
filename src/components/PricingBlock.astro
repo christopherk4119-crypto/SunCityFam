@@ -1,0 +1,33 @@
+---
+interface Props { excludeReviews?: string[] }
+const { excludeReviews = [] } = Astro.props;
+import ReviewsBy from './ReviewsBy.astro';
+import Check from './Check.astro';
+import { business } from '../config/business';
+---
+<section class="section bg-red-50">
+  <div class="container-x">
+    <div class="mx-auto mb-10 max-w-3xl text-center">
+      <p class="eyebrow">Fair, upfront pricing</p>
+      <h2 class="mb-4">Some of the Most Reasonable Roofing Quotes in Lethbridge</h2>
+      <p class="text-lg">Your quote is written, detailed and line-by-line — no hidden fees, no “we found something” surprises halfway through. Free, no obligation, and same-day quotes are often available.</p>
+    </div>
+    <div class="mb-10 grid gap-5 md:grid-cols-2">
+      <div class="rounded-xl border border-red-200 bg-white p-6">
+        <p class="eyebrow mb-1">Real job</p>
+        {/* TODO: confirm the $8,400 house + garage figure is still accurate/representative */}
+        <p class="font-heading text-2xl font-bold text-ink">{business.priceProof}</p>
+        <p class="mt-2 text-muted">Every roof is different — size, pitch, layers and decking all change the price. That's why the quote is free.</p>
+      </div>
+      <div class="rounded-xl border border-red-200 bg-white p-6">
+        <p class="eyebrow mb-1">Best-Price Guarantee</p>
+        <p class="font-heading text-2xl font-bold text-ink">We'll beat any written estimate.</p>
+        <p class="mt-2 text-sm text-muted">{business.bestPriceFinePrint}</p>
+      </div>
+    </div>
+    <ul class="mx-auto mb-10 grid max-w-3xl gap-3 sm:grid-cols-2">
+      {['Free, no-obligation quotes', 'Detailed written estimate', 'No hidden fees', 'Same-day quotes available'].map((t) => (<li class="flex gap-3"><Check />{t}</li>))}
+    </ul>
+    <ReviewsBy placement="pricing" limit={3} exclude={excludeReviews} />
+  </div>
+</section>

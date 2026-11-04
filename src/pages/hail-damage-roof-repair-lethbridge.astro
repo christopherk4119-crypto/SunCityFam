@@ -1,0 +1,82 @@
+---
+import ServicePage from '../layouts/ServicePage.astro';
+import ReviewsBy from '../components/ReviewsBy.astro';
+import { business } from '../config/business';
+import { common } from '../data/faqs';
+
+const faqs = [
+  { q: 'How do I know if my roof has hail damage?', a: 'From the ground, look for dents on vents, flashing, eavestroughs and downspouts, and piles of shingle granules at the bottom of downspouts. On the roof, hail leaves dark bruises where granules have been knocked off, and can crack or split shingles. The surest way is a free inspection — we get on the roof and check every slope.' },
+  { q: 'Is the hail inspection really free?', a: `Yes. No charge and no obligation. If there isn't enough damage to justify a claim, we'll tell you straight. Call ${business.phone.display} to book.` },
+  common.insurance,
+  { q: 'Will you waive my deductible or give me a free roof?', a: 'No. Your deductible is part of your insurance policy and you are responsible for it. Any roofer offering to "eat" your deductible is either padding the claim or cutting corners on your roof. We document the real damage and quote the real work.' },
+  { q: 'How long do I have to file a hail claim?', a: 'It depends on your policy — many insurers set a time limit for reporting storm damage. Check your policy or call your broker, and get the roof inspected soon after the storm so the damage is documented while it is fresh.' },
+  { q: 'Should I call my insurance company or a roofer first?', a: 'Get a free inspection first. If there is no real damage, you avoid opening a claim for nothing. If there is, you call your insurer with photos and a clear picture of what happened.' },
+  common.timeline,
+  common.cleanup,
+];
+---
+<ServicePage
+  title="Hail Damage Roof Repair Lethbridge | Sun City Roofing"
+  description="Hail damage roof repair & insurance claim help in Lethbridge. Free inspection, photo documentation, we work with your adjuster. Call (403) 929-5588."
+  h1="Hail Damage Roof Repair & Insurance Claims in Lethbridge"
+  intro="Hail just went through? We'll inspect your roof for free, document the damage with photos, and work with your insurance adjuster — then replace the roof and leave your yard spotless."
+  crumb="Hail Damage & Insurance Claims"
+  serviceType="Hail damage roof repair and replacement"
+  projectServices={['hail-damage-replacement']}
+  icon="hail"
+  faqs={faqs}
+  showInsurance
+  ctaText="Storm just rolled through?"
+>
+  <p>Hail damage is the most common job we do. That's not surprising — Southern Alberta gets some of the most frequent, damaging hail in Canada, and Lethbridge sits right in it. Most storms hit between June and August, often late in the afternoon, and they can go from a few pea-sized stones to golf-ball hail in a couple of minutes.</p>
+  <p>The tricky part is that hail damage usually doesn't leak right away. A bruised shingle looks fine from the driveway. Over the next few months, the damaged spots lose their protective granules, the asphalt underneath gets cooked by the sun, and freeze-thaw cycles open small cracks. By the time water shows up on your ceiling, the storm is long gone and the damage is harder to prove.</p>
+
+  <h2>What hail actually does to a roof</h2>
+  <p>Asphalt shingles are covered in mineral granules that shield them from UV and weather. When a hailstone hits, it can:</p>
+  <ul>
+    <li><strong>Knock granules loose</strong>, leaving dark, soft-looking spots — called bruises — that age much faster than the rest of the roof.</li>
+    <li><strong>Crack the shingle mat</strong>, which you often can't see without lifting the shingle.</li>
+    <li><strong>Break the seal strip</strong> so shingles start lifting the next time a Chinook blows through.</li>
+    <li><strong>Dent metal</strong> — roof vents, flashing, drip edge, eavestroughs and downspouts. Dents on soft metal are often the easiest way to show an adjuster how big the hail was.</li>
+  </ul>
+  <p>Older 3-tab shingles tend to take it worst. If your roof is already 15+ years old, a decent storm can push it past the point where repair makes sense.</p>
+
+  <h2>Our free hail damage inspection</h2>
+  <p>{business.owner} gets on the roof himself and checks every slope — not just the side you can see from the street. We look at shingles, ridge caps, vents, flashing, skylights and eavestroughs, and we take clear, dated photos of what we find.</p>
+  <p>Then we tell you honestly where you stand:</p>
+  <ul>
+    <li><strong>No real damage?</strong> We tell you. No point opening a claim for nothing.</li>
+    <li><strong>Minor damage?</strong> We'll walk you through whether a repair or a claim makes more sense for you.</li>
+    <li><strong>Significant damage?</strong> You get the photos and a detailed written estimate to take to your insurer.</li>
+  </ul>
+  <p>Want to book one? Call <a href={business.phone.tel} data-loc="hail-copy">{business.phone.display}</a>. {business.hours.copy}</p>
+
+  <h2>Working with your insurance adjuster</h2>
+  <p>Once you open a claim, your insurer sends an adjuster to look at the roof. We can meet them on site, point out the damage we documented and make sure nothing gets missed — a dented vent on the back slope or a cracked ridge cap is easy to overlook if nobody shows it to them.</p>
+  <p>We give you a detailed, line-by-line written estimate for the work: tear-off, any decking that needs replacing, underlayment, ice and water protection, shingles, vents and flashing, and cleanup. It's the same honest estimate whether you're paying yourself or claiming it.</p>
+  <p><strong>To be clear:</strong> your insurance company decides what's covered, not us. We don't promise "free roofs", and we will never offer to cover or waive your deductible. That's your policy — and a roofer who plays games with it is a roofer to stay away from.</p>
+
+  <h2>Replacing a hail-damaged roof</h2>
+  <p>When the claim is approved, we schedule the job, tear the old roof off down to the deck and check the wood underneath. Soft or rotted boards get replaced. Then we install new underlayment and IKO architectural shingles {/* TODO: confirm product line */}, along with new vents, flashing and ridge caps.</p>
+  <p>Hail season is also the right time to upgrade. If you had 3-tab shingles, moving to a thicker architectural laminate shingle gives you better impact resistance and much better wind performance for the next storm. <a href="/architectural-shingles/">See how 3-tab and architectural shingles compare</a>.</p>
+  <p>Popular colours on recent hail jobs include IKO Dual Grey, Dual Brown and Charcoal Grey. {business.owner} brings samples and walks you through the options so you can see them against your siding.</p>
+
+  <h2>Don't wait until spring</h2>
+  <p>It's tempting to put it off — especially if the storm came late in the summer. But Lethbridge winters are hard on a damaged roof. Chinooks can melt snow in an afternoon and refreeze it overnight, and every one of those cycles works water into cracked shingles and lifted seal strips. Ice damming at the eaves gets worse on a roof that's already compromised.</p>
+  <p>Many insurance policies also set a time limit for reporting storm damage. Get it inspected and documented while the damage is fresh, then decide. We work year-round, including winter, so the timing of your claim doesn't have to wait for summer.</p>
+
+  <h2>Why homeowners call us after a storm</h2>
+  <p>After a big hailstorm, every roofer in town is busy and some out-of-province crews show up knocking on doors. Here's what you get with a local Lethbridge roofer:</p>
+  <ul>
+    <li><strong>We answer.</strong> Call any time — including the night of the storm.</li>
+    <li><strong>{business.experienceCopy}.</strong> We know what real hail damage looks like and what it doesn't.</li>
+    <li><strong>We'll beat any written estimate</strong> for the same materials and scope.</li>
+    <li><strong>We're still here next year</strong> if you ever have a question about your roof.</li>
+    <li><strong>A clean yard</strong> under our <a href="/yard-clean-promise/">Yard-Clean Promise</a> — magnetic nail sweep, debris haul-away and a final walkthrough.</li>
+  </ul>
+  <div class="not-prose my-8"><ReviewsBy placement="speed" limit={1} /></div>
+
+  <h2>Hail repair across Lethbridge and nearby towns</h2>
+  <p>We do hail inspections and replacements all over Lethbridge — West Lethbridge, the north side, south Lethbridge and everywhere in between — plus <a href="/service-areas/coaldale/">Coaldale</a>, <a href="/service-areas/claresholm/">Claresholm</a> and across <a href="/service-areas/">Southern Alberta</a>. Need something smaller? We also handle <a href="/roof-repair-lethbridge/">roof repairs</a> and <a href="/gutters-lethbridge/">eavestrough replacement</a> after a storm.</p>
+  <p>Ready to find out where you stand? <a href="/get-estimate/">Book your free hail inspection</a> or call {business.phone.display}.</p>
+</ServicePage>

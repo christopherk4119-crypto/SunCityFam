@@ -1,0 +1,31 @@
+---
+import Icon from './Icon.astro';
+import { business } from '../config/business';
+interface Props { heading?: string; tint?: boolean }
+const { heading = 'How Insurance Roof Claims Work With Us', tint = false } = Astro.props;
+const steps = [
+  { icon: 'search', title: 'Free inspection', text: `${business.owner} gets on your roof, checks every slope, and tells you straight whether there's real hail damage worth claiming — or not.` },
+  { icon: 'camera', title: 'Photo documentation', text: 'We photograph and mark the damage — bruised shingles, dented vents, cracked caps — so you have clear proof for your claim.' },
+  { icon: 'handshake', title: 'We work with your adjuster', text: 'We can meet your adjuster on the roof, walk them through the damage and provide a detailed written estimate for the scope of work.' },
+  { icon: 'roof', title: 'New roof + clean yard', text: 'Once your claim is approved, we replace the roof and leave your yard nail-free under our Yard-Clean Promise.' },
+];
+---
+<section class:list={['section', tint ? 'bg-red-50' : 'bg-white']}>
+  <div class="container-x">
+    <p class="eyebrow text-center">Hail damage & insurance</p>
+    <h2 class="mx-auto mb-10 max-w-3xl text-center">{heading}</h2>
+    <ol class="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+      {steps.map((s, i) => (
+        <li class="relative rounded-xl border border-gray-200 bg-white p-6 shadow-sm">
+          <span class="absolute -top-3 left-6 rounded-full bg-ink px-3 py-0.5 font-heading text-sm font-bold text-white">Step {i + 1}</span>
+          <Icon name={s.icon} class="mb-3 mt-2 h-9 w-9 text-red" />
+          <h3 class="mb-2 text-xl">{s.title}</h3>
+          <p class="text-ink-soft">{s.text}</p>
+        </li>
+      ))}
+    </ol>
+    <p class="mx-auto mt-8 max-w-3xl text-center text-sm text-ink-soft">
+      Coverage decisions are made by your insurance company, not by us. We can't promise a claim will be approved, and we will never offer to waive or cover your deductible.
+    </p>
+  </div>
+</section>

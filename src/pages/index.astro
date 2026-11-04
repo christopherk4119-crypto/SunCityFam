@@ -1,0 +1,188 @@
+---
+import { getImage } from 'astro:assets';
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+import Check from '../components/Check.astro';
+import TrustBar from '../components/TrustBar.astro';
+import ReviewsBy from '../components/ReviewsBy.astro';
+import ReviewCard from '../components/ReviewCard.astro';
+import RatingBadge from '../components/RatingBadge.astro';
+import InsuranceSteps from '../components/InsuranceSteps.astro';
+import ServiceGrid from '../components/ServiceGrid.astro';
+import ComparisonTable from '../components/ComparisonTable.astro';
+import ProjectStrip from '../components/ProjectStrip.astro';
+import YardClean from '../components/YardClean.astro';
+import PricingBlock from '../components/PricingBlock.astro';
+import MeetChris from '../components/MeetChris.astro';
+import ServiceAreasList from '../components/ServiceAreasList.astro';
+import Faq from '../components/Faq.astro';
+import CtaInline from '../components/CtaInline.astro';
+import CtaBand from '../components/CtaBand.astro';
+import EstimateForm from '../components/EstimateForm.astro';
+import { business } from '../config/business';
+import { common } from '../data/faqs';
+import { faqSchema } from '../lib/schema';
+
+const faqs = [common.cost, common.quote, common.insurance, common.winter, common.timeline, common.home, common.warranty, common.bestPrice];
+
+// Hero background: a real job photo marked heroFor: "/" in src/content/projects/
+const projects = await getCollection('projects');
+const heroPhoto = projects.find((p) => p.data.heroFor === '/');
+const heroImg = heroPhoto ? await getImage({ src: heroPhoto.data.image, width: 1600, format: 'webp' }) : null;
+const reviews = (await getCollection('reviews')).sort((a, b) => a.data.order - b.data.order);
+const heroReview = reviews.find((r) => r.data.placements.includes('hero'));
+const homeReviews = reviews.filter((r) => ['josh-b', 'mark-l'].includes(r.id));
+const trust = [
+  ...(business.licensedInsured ? ['Licensed & Insured'] : []),
+  'Best-Price Guarantee',
+  'Yard-Clean Promise',
+  'Insurance Claims Help',
+];
+---
+<Base
+  title="Roofers Lethbridge | Sun City Roofing"
+  description="Lethbridge roofing company for hail damage, roof repairs and replacements. 20+ years' experience, free same-day quotes. Call (403) 929-5588."
+  schema={[faqSchema(faqs)]}
+  preloadImage={heroImg?.src}
+>
+  <!-- HERO -->
+  <section class="relative overflow-hidden bg-ink text-white">
+    {heroImg && heroPhoto
+      ? <img src={heroImg.src} alt={heroPhoto.data.alt} width={heroImg.attributes.width ?? 1600} height={heroImg.attributes.height ?? 1067} fetchpriority="high" loading="eager" decoding="async" class="absolute inset-0 h-full w-full object-cover opacity-40" />
+      : <div class="absolute inset-0 bg-[radial-gradient(circle_at_85%_20%,rgba(220,38,38,0.35),transparent_55%)]" aria-hidden="true">{/* TODO: real job photo as hero background (set heroFor: "/") */}</div>}
+    <div class="container-x relative grid gap-10 py-12 sm:py-16 lg:grid-cols-[3fr_2fr] lg:items-center lg:py-20">
+      <div>
+        <p class="mb-3 font-heading font-bold uppercase tracking-wider text-red-200">Lethbridge, Alberta</p>
+        <h1 class="mb-5 text-white">Lethbridge Roofers You Can Trust: Hail Damage, Repairs &amp; Roof Replacements</h1>
+        <p class="mb-7 text-lg text-gray-200 sm:text-xl">20+ years of experience · free same-day quotes · we beat any written estimate · spotless yard guaranteed</p>
+        <div class="flex flex-col gap-3 sm:flex-row">
+          <a href={business.phone.tel} data-loc="hero" class="btn btn-red !text-xl">📞 Call {business.phone.display}</a>
+          <a href="#estimate" class="btn btn-white">Get Free Estimate</a>
+        </div>
+        <p class="mt-4 font-semibold text-white">{business.hours.copy}</p>
+        <div class="mt-3"><RatingBadge light /></div>
+        <ul class="mt-7 grid grid-cols-2 gap-3 text-sm font-semibold sm:flex sm:flex-wrap sm:gap-5">
+          {trust.map((t) => (<li class="flex items-center gap-2"><Check />{t}</li>))}
+        </ul>
+      </div>
+      {heroReview && (
+        <figure class="rounded-2xl bg-white p-6 text-ink-soft shadow-xl">
+          <p class="eyebrow mb-2">“First to respond, best price”</p>
+          <blockquote><p>{heroReview.data.quote}</p></blockquote>
+          <figcaption class="mt-4 font-heading font-bold text-ink">— {heroReview.data.author}, Google review</figcaption>
+        </figure>
+      )}
+    </div>
+  </section>
+
+  <TrustBar />
+
+  <!-- HAIL -->
+  <section class="section bg-white">
+    <div class="container-x grid gap-10 lg:grid-cols-2 lg:items-center">
+      <div>
+        <p class="eyebrow">Our #1 job type</p>
+        <h2 class="mb-4">Hail Damage? Get a Free Roof Inspection Before You Call Your Insurer</h2>
+        <p class="mb-4 text-lg">Southern Alberta gets some of the most frequent, damaging hail in Canada, and storm season here runs June through August. Hail bruises shingles and knocks granules loose in ways you can't see from the ground — then the leaks show up months later.</p>
+        <p class="mb-6">We'll get on your roof, tell you honestly whether the damage is worth a claim, document it with photos, and work with your adjuster. If it's not worth claiming, we'll tell you that too.</p>
+        <ul class="mb-7 space-y-3">
+          {['Free hail damage inspection', 'Photo documentation for your claim', 'We meet your adjuster on the roof', 'New roof + clean yard when it\'s approved'].map((t) => (<li class="flex gap-3"><Check />{t}</li>))}
+        </ul>
+        <div class="flex flex-col gap-3 sm:flex-row">
+          <a href={business.phone.tel} data-loc="home-hail" class="btn btn-red">Book a Free Hail Inspection</a>
+          <a href="/hail-damage-roof-repair-lethbridge/" class="btn btn-outline">How hail claims work</a>
+        </div>
+      </div>
+      <div class="rounded-2xl border border-gray-200 bg-gray-50 p-6 sm:p-8">
+        <h3 class="mb-4">Signs your roof took a hit</h3>
+        <ul class="space-y-3">
+          {['Dents on vents, flashing or eavestroughs', 'Dark spots where granules are missing', 'Piles of granules at downspouts', 'Cracked or split shingles', 'Neighbours on your street getting new roofs'].map((t) => (<li class="flex gap-3"><Icon name="hail" class="h-6 w-6 shrink-0 text-red" />{t}</li>))}
+        </ul>
+        <p class="mt-5 text-sm text-muted">Insurers usually set a time limit on reporting storm damage — check your policy, and don't wait until spring.</p>
+      </div>
+    </div>
+  </section>
+
+  <InsuranceSteps tint />
+
+  <CtaInline text="Think your roof took hail damage?" tint={false} />
+
+  <!-- SERVICES -->
+  <section class="section bg-gray-50">
+    <div class="container-x">
+      <div class="mb-10 text-center">
+        <p class="eyebrow">What we do</p>
+        <h2>Roofing Services in Lethbridge</h2>
+      </div>
+      <ServiceGrid />
+    </div>
+  </section>
+
+  <!-- 3-TAB vs ARCHITECTURAL -->
+  <section class="section bg-white">
+    <div class="container-x">
+      <div class="mx-auto mb-8 max-w-3xl text-center">
+        <p class="eyebrow">Know what you're buying</p>
+        <h2 class="mb-4">3-Tab vs Architectural Shingles</h2>
+        <p class="text-lg">Lethbridge gets Chinook gusts that tear 3-tab shingles off every winter. Here's why most homeowners upgrade when they re-roof.</p>
+      </div>
+      <ComparisonTable />
+      <p class="mt-6 text-center"><a href="/architectural-shingles/" class="font-heading font-bold text-red-dark">Full comparison: architectural shingles vs 3-tab →</a></p>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section class="section bg-gray-50">
+    <div class="container-x">
+      <div class="mb-8 flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
+        <div><p class="eyebrow">Real jobs, real roofs</p><h2>Recent Roofing Projects</h2></div>
+        <a href="/gallery/" class="font-heading font-bold text-red-dark">View the full gallery →</a>
+      </div>
+      <ProjectStrip featuredOnly limit={6} />
+    </div>
+  </section>
+
+  <YardClean />
+
+  <PricingBlock excludeReviews={heroReview ? [heroReview.id] : []} />
+
+  <CtaInline text="Want a quote you can actually compare?" tint={false} />
+
+  <MeetChris />
+
+  <!-- REVIEWS -->
+  <section class="section bg-white">
+    <div class="container-x">
+      <div class="mb-10 text-center">
+        <p class="eyebrow">What homeowners say</p>
+        <h2 class="mb-3">Reviews From Our Customers</h2>
+        <RatingBadge />
+      </div>
+      <div class="grid gap-5 md:grid-cols-2">
+        {homeReviews.map((r) => <ReviewCard {...r.data} />)}
+      </div>
+      <div class="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
+        <a href="/reviews/" class="btn btn-outline">Read more reviews</a>
+        {business.social.googleWriteReviewUrl && <a href={business.social.googleWriteReviewUrl} target="_blank" rel="noopener" class="btn btn-outline">Leave us a Google review</a>}
+      </div>
+    </div>
+  </section>
+
+  <ServiceAreasList />
+
+  <Faq faqs={faqs} />
+
+  <section class="section bg-red-50">
+    <div class="container-x grid gap-10 lg:grid-cols-2 lg:items-center">
+      <div>
+        <h2 class="mb-4">Get Your Free Roofing Estimate</h2>
+        <p class="mb-4 text-lg">Fill this out and {business.owner} will call you back. Or skip the form and call <a href={business.phone.tel} data-loc="home-form-copy" class="font-bold text-red-dark">{business.phone.display}</a> — we answer, any time.</p>
+        <ReviewsBy placement="speed" limit={1} />
+      </div>
+      <EstimateForm />
+    </div>
+  </section>
+
+  <CtaBand />
+</Base>

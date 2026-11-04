@@ -1,0 +1,76 @@
+---
+import ServicePage from '../layouts/ServicePage.astro';
+import { business } from '../config/business';
+import { common } from '../data/faqs';
+
+const faqs = [
+  { q: 'Is metal roofing worth it in Lethbridge?', a: 'It can be. Metal handles wind well, sheds snow quickly and lasts a long time. It costs more up front than asphalt shingles, so it makes the most sense if you plan to stay in the house a long time. We\'ll price both so you can compare.' },
+  { q: 'What are open metal valleys?', a: 'A valley is where two roof slopes meet and the most water runs. In an open metal valley, a strip of metal runs down that channel and the shingles are cut back on each side. Water and snow melt run off on the metal instead of working into the shingles.' },
+  { q: 'Is a metal roof noisy in hail or rain?', a: 'Over a solid deck with underlayment and an insulated attic, most homeowners don\'t notice much difference from a shingle roof. Hail on metal is louder than on shingles, but it is rarely a problem inside a finished home.' },
+  { q: 'Does hail dent metal roofing?', a: 'Large hail can dent metal, especially lighter-gauge panels. Dents are usually cosmetic and don\'t cause leaks, but check how your insurance policy treats cosmetic damage. Ask us about panel options if hail is a big concern.' },
+  common.cost,
+  common.winter,
+  common.warranty,
+  common.cleanup,
+];
+---
+<ServicePage
+  title="Metal Roofing Lethbridge | Sun City Roofing"
+  description="Metal roofing and open metal valleys in Lethbridge. Long-lasting, wind-tough roofs that shed snow fast. Honest quotes, clean yard. Call (403) 929-5588."
+  h1="Metal Roofing & Open Metal Valleys in Lethbridge"
+  intro="Metal roofs and open metal valleys built to handle Lethbridge wind, snow and freeze-thaw. We'll give you an honest comparison with shingles so you can decide."
+  crumb="Metal Roofing"
+  serviceType="Metal roofing installation"
+  projectServices={['metal-roofing', 'open-metal-valleys']}
+  icon="metal"
+  faqs={faqs}
+  ctaText="Considering a metal roof?"
+>
+  {/* TODO: owner to confirm metal scope — full metal roofs, garages/outbuildings, panel types (exposed fastener vs standing seam). Adjust copy to match. */}
+  <p>More Lethbridge homeowners are asking about metal roofing — and for good reason. Metal handles high wind well, sheds snow quickly and can last a very long time. It's not the right fit for every house or every budget, though. Here's an honest look at metal roofing in Southern Alberta, plus a smaller upgrade that a lot of shingle roofs benefit from: open metal valleys.</p>
+
+  <h2>Why consider metal roofing in Lethbridge?</h2>
+  <ul>
+    <li><strong>Wind.</strong> Properly fastened metal panels don't lift and tear the way older shingles do in Chinook gusts.</li>
+    <li><strong>Snow and ice.</strong> Snow slides off metal, which helps with heavy loads and ice damming at the eaves.</li>
+    <li><strong>Long life.</strong> A well-installed metal roof can outlast several shingle roofs.</li>
+    <li><strong>Low maintenance.</strong> No granules to lose, no seal strips to fail.</li>
+    <li><strong>Fire resistance</strong> — worth thinking about on acreages and mountain cabins.</li>
+  </ul>
+
+  <h2>The honest downsides</h2>
+  <ul>
+    <li><strong>Cost.</strong> Metal costs more up front than <a href="/architectural-shingles/">architectural shingles</a>.</li>
+    <li><strong>Hail dents.</strong> Large hail can dent metal. It's usually cosmetic, but check how your insurance handles cosmetic damage.</li>
+    <li><strong>Snow sliding off.</strong> Snow can come off in one big sheet. Snow guards over doors and walkways help.</li>
+    <li><strong>Complex roofs.</strong> Lots of valleys, dormers and penetrations add labour and cost.</li>
+  </ul>
+  <p>If you're staying in the house long-term and want a "do it once" roof, metal is worth pricing. If you're planning to sell in a few years, architectural shingles usually make more financial sense. We'll price both and let you decide.</p>
+
+  <h2>Open metal valleys: a smart upgrade for shingle roofs</h2>
+  <p>Valleys — where two roof slopes meet — carry more water than any other part of the roof. In spring, and during every Chinook melt, snow melt pours down them. That's why valleys are one of the most common places for leaks and early wear.</p>
+  <p>With an <strong>open metal valley</strong>, a pre-formed metal channel runs down the valley over ice and water protection. Shingles are trimmed back on each side, so water and slush run off on the metal instead of across shingle edges. Benefits:</p>
+  <ul>
+    <li>Water and ice move off the roof faster</li>
+    <li>Less wear on the shingles in the valley</li>
+    <li>Debris doesn't catch as easily</li>
+    <li>A clean, sharp look that a lot of homeowners like</li>
+  </ul>
+  <p>You can add open metal valleys to any <a href="/roof-replacement-lethbridge/">roof replacement</a>. Ask {business.owner} to price it on your quote.</p>
+
+  <h2>How we install metal</h2>
+  <ol>
+    <li>Free inspection and written quote with metal and shingle options side by side</li>
+    <li>Tear-off and deck inspection — replacing bad boards, or re-sheeting with OSB if you're coming off <a href="/cedar-shake-removal/">cedar shakes</a></li>
+    <li>Ice and water protection and underlayment</li>
+    <li>Trim, flashing and panels fastened to spec for wind</li>
+    <li>Snow guards where needed</li>
+    <li>Magnetic nail and screw sweep, full debris haul-away and final walkthrough under our <a href="/yard-clean-promise/">Yard-Clean Promise</a></li>
+  </ol>
+
+  <h2>Metal for garages, cabins and outbuildings</h2>
+  <p>Metal is a natural fit for detached garages, shops and mountain cabins, where snow load and long life matter most. If you're doing the house in shingles, a metal garage roof can be a good-value option too.</p>
+
+  <h2>Metal roofing across Lethbridge and area</h2>
+  <p>We install metal roofing and open metal valleys across Lethbridge, <a href="/service-areas/coaldale/">Coaldale</a>, <a href="/service-areas/claresholm/">Claresholm</a> and <a href="/service-areas/">Southern Alberta</a>. Call <a href={business.phone.tel} data-loc="metal-copy">{business.phone.display}</a> or <a href="/get-estimate/">get a free metal roofing estimate</a>.</p>
+</ServicePage>

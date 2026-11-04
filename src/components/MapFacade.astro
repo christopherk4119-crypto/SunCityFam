@@ -1,0 +1,26 @@
+---
+// Click-to-load Google Map — no third-party requests until the visitor asks for it.
+import { business, fullAddress } from '../config/business';
+const src = `https://www.google.com/maps?q=${encodeURIComponent(`${business.name}, ${fullAddress}`)}&output=embed`;
+const link = business.social.googleBusinessProfile || `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(fullAddress)}`;
+---
+<div class="map-facade relative aspect-[16/10] w-full overflow-hidden rounded-xl border border-gray-200 bg-gray-100" data-src={src}>
+  <div class="absolute inset-0 flex flex-col items-center justify-center gap-3 p-6 text-center">
+    <p class="font-heading text-lg font-bold text-ink">{fullAddress}</p>
+    <button type="button" class="btn btn-outline map-load">Show map</button>
+    <a href={link} target="_blank" rel="noopener" class="text-sm font-semibold text-red-dark">Open in Google Maps</a>
+  </div>
+</div>
+<script>
+  document.querySelectorAll<HTMLElement>('.map-facade').forEach((el) => {
+    el.querySelector('.map-load')?.addEventListener('click', () => {
+      const f = document.createElement('iframe');
+      f.src = el.dataset.src || '';
+      f.title = 'Map to Sun City Roofing';
+      f.loading = 'lazy';
+      f.referrerPolicy = 'no-referrer-when-downgrade';
+      f.className = 'absolute inset-0 h-full w-full border-0';
+      el.replaceChildren(f);
+    });
+  });
+</script>

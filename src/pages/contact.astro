@@ -1,0 +1,30 @@
+---
+import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+import MapFacade from '../components/MapFacade.astro';
+import EstimateForm from '../components/EstimateForm.astro';
+import { business } from '../config/business';
+---
+<Base
+  title="Contact Sun City Roofing | Lethbridge Roofers"
+  description="Contact Sun City Roofing at 114 Stafford Bay N, Lethbridge, AB. Open 24 hours — call or text (403) 929-5588 for a free estimate."
+  breadcrumbs={[{ name: 'Contact', path: '/contact/' }]}
+>
+  <section class="section !pt-10 bg-white">
+    <div class="container-x grid gap-10 lg:grid-cols-2">
+      <div>
+        <h1 class="mb-4">Contact Sun City Roofing</h1>
+        <p class="mb-8 text-lg">{business.hours.copy} Phone is fastest.</p>
+        <ul class="mb-8 space-y-5 text-lg">
+          <li class="flex gap-3"><Icon name="phone" class="mt-1 h-6 w-6 text-red" /><div><strong class="block text-ink">Call or text</strong><a href={business.phone.tel} data-loc="contact" class="font-heading text-2xl font-bold text-ink">{business.phone.display}</a> · <a href={business.phone.sms} data-loc="contact-sms" class="text-base font-semibold text-red-dark">Send a text</a></div></li>
+          <li class="flex gap-3"><Icon name="mail" class="mt-1 h-6 w-6 text-red" /><div><strong class="block text-ink">Email</strong><a href={`mailto:${business.email}`} class="text-red-dark">{business.email}</a></div></li>
+          <li class="flex gap-3"><Icon name="pin" class="mt-1 h-6 w-6 text-red" /><div><strong class="block text-ink">Address</strong><address class="not-italic">{business.name}<br />{business.address.street}<br />{business.address.city}, {business.address.region} {business.address.postalCode}</address></div></li>
+          <li class="flex gap-3"><Icon name="clock" class="mt-1 h-6 w-6 text-red" /><div><strong class="block text-ink">Hours</strong>Open 24 hours, 7 days a week</div></li>
+          <li class="flex gap-3"><Icon name="facebook" class="mt-1 h-6 w-6 text-red" /><div><strong class="block text-ink">Facebook</strong><a href={business.social.facebook} target="_blank" rel="noopener" class="text-red-dark">Sun City Roofing on Facebook</a></div></li>
+        </ul>
+        <MapFacade />
+      </div>
+      <EstimateForm />
+    </div>
+  </section>
+</Base>

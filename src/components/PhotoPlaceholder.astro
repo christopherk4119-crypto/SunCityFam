@@ -1,0 +1,14 @@
+---
+/**
+ * Neutral branded placeholder shown where a real job photo is still missing.
+ * NEVER replace with stock photos presented as Sun City's work.
+ * See TODO.md → "Photos needed".
+ */
+import Icon from './Icon.astro';
+interface Props { icon?: string; label?: string; class?: string; aspect?: string }
+const { icon = 'roof', label = 'Project photo coming soon', class: cls = '', aspect = 'aspect-[4/3]' } = Astro.props;
+---
+<div class:list={['flex w-full flex-col items-center justify-center gap-2 overflow-hidden rounded-xl bg-gradient-to-br from-red-50 to-red-100 text-red-dark', aspect, cls]} role="img" aria-label={label}>
+  <Icon name={icon} class="h-14 w-14" />
+  <span class="font-heading text-sm font-semibold">{label}</span>
+</div>

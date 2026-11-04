@@ -1,0 +1,78 @@
+---
+import ServicePage from '../layouts/ServicePage.astro';
+import ReviewsBy from '../components/ReviewsBy.astro';
+import { business } from '../config/business';
+import { common } from '../data/faqs';
+
+const faqs = [
+  { q: 'How much does a roof repair cost?', a: `It depends on what's wrong and how easy it is to get to. Replacing a few blown-off shingles is a small job; chasing a leak around a chimney or skylight takes more. We look first and give you a written price before any work starts. Call ${business.phone.display}.` },
+  { q: 'Can you come out quickly for a leak?', a: `Call ${business.phone.display} — we answer any time. If water is coming in, we'll help you stop the damage first and fix it properly as soon as the weather allows.` },
+  { q: 'Should I repair or replace my roof?', a: 'If the damage is in one area and the rest of the roof is in decent shape, repair. If the shingles are worn out everywhere, the roof is 20+ years old, or you\'re fixing something new every winter, replacement is usually better value. We\'ll tell you honestly.' },
+  { q: 'Can you match my existing shingles?', a: 'We get as close as possible. Shingle colours fade and product lines change, so an exact match on an older roof isn\'t always possible. We\'ll show you the closest option before we start.' },
+  { q: 'Is wind damage covered by insurance?', a: 'Often, but it depends on your policy. We can document the damage with photos and give you a written estimate to send to your insurer. Your insurance company makes the coverage decision.' },
+  common.winter,
+  common.home,
+  common.cleanup,
+];
+---
+<ServicePage
+  title="Roof Repair Lethbridge | Sun City Roofing"
+  description="Roof repair in Lethbridge: leaks, wind damage, missing shingles and flashing. Honest repair-or-replace advice. We answer any time. Call (403) 929-5588."
+  h1="Roof Repair in Lethbridge: Leaks, Wind Damage & Missing Shingles"
+  intro="Shingles blown off in a Chinook? Water stain on the ceiling? We find the real cause, fix it properly and tell you honestly whether the rest of the roof has years left."
+  crumb="Roof Repair"
+  serviceType="Roof repair"
+  projectServices={['roof-repair']}
+  icon="wrench"
+  faqs={faqs}
+  ctaText="Got a leak or missing shingles?"
+>
+  <p>Most roof repairs in Lethbridge come down to three things: wind, water and age. Our Chinook winds lift and tear shingles, freeze-thaw cycles work water into every weak spot, and our hot, dry summers bake older shingles until they crack. The good news is that a lot of problems can be fixed without replacing the whole roof — if they're caught early and fixed properly.</p>
+
+  <h2>Roof problems we repair</h2>
+  <ul>
+    <li><strong>Missing or blown-off shingles</strong> after a windstorm</li>
+    <li><strong>Roof leaks</strong> — ceiling stains, drips in the attic, water around light fixtures</li>
+    <li><strong>Lifted or unsealed shingles</strong> that flap in the wind</li>
+    <li><strong>Damaged flashing</strong> around chimneys, walls, skylights and plumbing stacks</li>
+    <li><strong>Cracked or damaged roof vents</strong> and pipe boots</li>
+    <li><strong>Ridge cap damage</strong></li>
+    <li><strong>Ice dam damage</strong> at the eaves</li>
+    <li><strong>Storm and hail damage</strong> — see <a href="/hail-damage-roof-repair-lethbridge/">hail damage &amp; insurance claims</a></li>
+  </ul>
+
+  <h2>Wind damage: the Lethbridge special</h2>
+  <p>Lethbridge is one of the windiest cities in Canada. When a Chinook comes through with gusts over 100 km/h, older shingles — especially 3-tab — start to lift. Once the seal strip lets go, the next gust bends the shingle back, creases it, and eventually tears it off. That's why you'll often see a few shingles in the yard after a big wind.</p>
+  <p>A missing shingle isn't just cosmetic. It exposes the nails and underlayment of the row below, and the next rain or snow melt goes straight in. Get it fixed soon — it's usually a small, quick job if you don't wait.</p>
+  <p>If you're losing shingles every winter, the honest answer may be that the roof is done. An upgrade to <a href="/architectural-shingles/">architectural shingles</a> with a much higher wind rating can stop the yearly repair bills.</p>
+
+  <h2>Finding the real cause of a leak</h2>
+  <p>Water travels. A stain in your living room ceiling might start six feet uphill at a pipe boot or a piece of flashing. Patching the spot right above the stain often doesn't fix anything.</p>
+  <p>We trace the leak from the attic and the roof, find where water is actually getting in, and fix that. The most common culprits we see:</p>
+  <ul>
+    <li>Cracked rubber pipe boots around plumbing stacks</li>
+    <li>Loose or rusted flashing at chimneys and where the roof meets a wall</li>
+    <li>Ice damming at the eaves during freeze-thaw cycles</li>
+    <li>Exposed or backed-out nails</li>
+    <li>Worn-out shingles in a valley, where the most water runs</li>
+  </ul>
+
+  <h2>Repair or replace? An honest answer</h2>
+  <p>We don't push a new roof on anyone who doesn't need one. After we look at the roof, you'll get a straight recommendation:</p>
+  <ul>
+    <li><strong>Repair</strong> if the problem is isolated and the rest of the roof is in decent shape.</li>
+    <li><strong>Replace</strong> if the shingles are worn out across the whole roof, you're on your third repair in a few years, or there's damage to the deck underneath.</li>
+  </ul>
+  <p>Either way, you get it in writing with a clear price. If it's time for a new roof, see our <a href="/roof-replacement-lethbridge/">roof replacement</a> page for how we do it.</p>
+  <div class="my-8"><ReviewsBy placement="quality" limit={1} /></div>
+
+  <h2>Winter roof repairs</h2>
+  <p>Roofs don't only break in summer. We work year-round, and we can make repairs on winter days when it's safe and the conditions are right. If water is coming in and the weather won't cooperate, we'll help you stop the damage first and finish the permanent fix as soon as we can.</p>
+
+  <h2>Storm damage and insurance</h2>
+  <p>If wind or hail caused the damage, it may be covered by your home insurance. We'll photograph the damage, write up a detailed repair estimate and can talk to your adjuster. Your insurer decides what's covered — we just make sure the damage is documented clearly.</p>
+
+  <h2>Roof repair across Lethbridge and area</h2>
+  <p>We fix roofs all over Lethbridge, plus <a href="/service-areas/coaldale/">Coaldale</a>, <a href="/service-areas/claresholm/">Claresholm</a> and across <a href="/service-areas/">Southern Alberta</a>. While we're up there, we can also check your <a href="/gutters-lethbridge/">eavestroughs</a>.</p>
+  <p>Call <a href={business.phone.tel} data-loc="repair-copy">{business.phone.display}</a> — we answer any time. Or <a href="/get-estimate/">request a free repair estimate</a>.</p>
+</ServicePage>

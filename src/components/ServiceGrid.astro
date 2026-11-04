@@ -1,0 +1,49 @@
+---
+import { Image } from 'astro:assets';
+import { getCollection } from 'astro:content';
+import Icon from './Icon.astro';
+import PhotoPlaceholder from './PhotoPlaceholder.astro';
+import { services } from '../config/business';
+
+// service href → project `service` value(s) whose photos can illustrate it
+const serviceMap: Record<string, string[]> = {
+  '/hail-damage-roof-repair-lethbridge/': ['hail-damage-replacement'],
+  '/roof-replacement-lethbridge/': ['roof-replacement'],
+  '/roof-repair-lethbridge/': ['roof-repair'],
+  '/architectural-shingles/': ['architectural-upgrade'],
+  '/cedar-shake-removal/': ['cedar-shake-removal'],
+  '/metal-roofing-lethbridge/': ['metal-roofing', 'open-metal-valleys'],
+  '/gutters-lethbridge/': ['gutters'],
+};
+const blurbs: Record<string, string> = {
+  '/hail-damage-roof-repair-lethbridge/': 'Free hail inspections, photo documentation and help with your insurance adjuster.',
+  '/roof-replacement-lethbridge/': 'Full tear-off and re-roof with IKO architectural shingles. Detailed, no-surprise quotes.',
+  '/roof-repair-lethbridge/': 'Leaks, wind damage and missing shingles fixed properly — not patched and forgotten.',
+  '/architectural-shingles/': 'Swap tired 3-tab for thicker laminate shingles built for Chinook winds.',
+  '/cedar-shake-removal/': 'Old cedar shakes off, new OSB sheeting down, ready for a modern shingle roof.',
+  '/metal-roofing-lethbridge/': 'Metal roofing and open metal valleys that shed water and snow fast.',
+  '/gutters-lethbridge/': 'Eavestrough install, repair and cleaning to keep water off your foundation.',
+};
+const projects = await getCollection('projects');
+const exclude = Astro.props.exclude as string | undefined;
+const list = services.filter((s) => s.href !== exclude);
+---
+<ul class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+  {list.map((s) => {
+    const photo = projects.find((p) => serviceMap[s.href]?.includes(p.data.service) && p.data.shotType !== 'before');
+    return (
+      <li>
+        <a href={s.href} class="group flex h-full flex-col overflow-hidden rounded-xl border border-gray-200 bg-white no-underline shadow-sm transition hover:-translate-y-0.5 hover:shadow-md">
+          {photo
+            ? <Image src={photo.data.image} alt={photo.data.alt} width={800} widths={[400, 800]} sizes="(min-width:1024px) 360px, (min-width:640px) 50vw, 100vw" class="aspect-[4/3] w-full object-cover" loading="lazy" />
+            : <PhotoPlaceholder icon={s.icon} label={`${s.short} photo coming soon`} class="!rounded-none" />}
+          <div class="flex flex-1 flex-col p-5">
+            <h3 class="mb-2 flex items-center gap-2 text-xl"><Icon name={s.icon} class="h-6 w-6 text-red" />{s.name}</h3>
+            <p class="flex-1 text-ink-soft">{blurbs[s.href]}</p>
+            <span class="mt-4 inline-flex items-center gap-1 font-heading font-bold text-red-dark">Learn about {s.short.toLowerCase()} <Icon name="arrow" class="h-4 w-4 transition group-hover:translate-x-1" /></span>
+          </div>
+        </a>
+      </li>
+    );
+  })}
+</ul>

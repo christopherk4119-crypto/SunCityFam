@@ -1,0 +1,31 @@
+---
+// TODO: tie the wind ratings to the exact IKO product lines installed (e.g. Cambridge vs Dynasty).
+const rows = [
+  ['Typical lifespan', '15–20 years', '25–30+ years'],
+  ['Wind rating', 'Around 100 km/h (≈60 mph)', 'Up to ~210 km/h (≈130 mph), depending on product & install'],
+  ['Look', 'Flat, uniform tabs', 'Dimensional 3D texture'],
+  ['Impact resistance', 'Lower — thinner single layer', 'Better — thicker laminated layers'],
+  ['Good fit for Lethbridge?', 'Struggles with Chinook gusts', 'Built for wind and hail country'],
+];
+---
+<div class="overflow-x-auto rounded-xl border border-gray-200 bg-white shadow-sm">
+  <table class="w-full min-w-[540px] text-left">
+    <caption class="sr-only">3-tab shingles compared with architectural laminate shingles</caption>
+    <thead class="bg-ink text-white">
+      <tr>
+        <th scope="col" class="p-4 font-heading">&nbsp;</th>
+        <th scope="col" class="p-4 font-heading">3-Tab Shingles</th>
+        <th scope="col" class="p-4 font-heading">Architectural Laminate</th>
+      </tr>
+    </thead>
+    <tbody class="divide-y divide-gray-100">
+      {rows.map(([k, a, b]) => (
+        <tr>
+          <th scope="row" class="p-4 font-semibold text-ink">{k}</th>
+          <td class="p-4 text-ink-soft">{a}</td>
+          <td class="bg-red-50/60 p-4 font-medium text-ink">{b}</td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</div>

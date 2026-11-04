@@ -1,0 +1,72 @@
+---
+import Logo from './Logo.astro';
+import Icon from './Icon.astro';
+import { business, services } from '../config/business';
+const nav = [
+  { label: 'Services', href: '/services/' },
+  { label: 'Hail Claims', href: '/hail-damage-roof-repair-lethbridge/' },
+  { label: 'Gallery', href: '/gallery/' },
+  { label: 'Reviews', href: '/reviews/' },
+  { label: 'Areas', href: '/service-areas/' },
+  { label: 'Contact', href: '/contact/' },
+];
+const path = Astro.url.pathname;
+---
+<header class="sticky top-0 z-50 border-b border-gray-200 bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/90">
+  <div class="container-x flex h-16 items-center justify-between gap-3 md:h-20">
+    <a href="/" class="shrink-0">
+      <Logo class="h-9 w-auto md:h-11" />
+    </a>
+
+    <nav class="hidden xl:block" aria-label="Main">
+      <ul class="flex items-center gap-5 whitespace-nowrap font-heading font-semibold text-ink">
+        {nav.map((n) => (
+          <li><a href={n.href} class:list={['no-underline hover:text-red-dark', path.startsWith(n.href) && 'text-red-dark']} aria-current={path === n.href ? 'page' : undefined}>{n.label}</a></li>
+        ))}
+      </ul>
+    </nav>
+
+    <div class="flex items-center gap-2 md:gap-4">
+      <a href={business.phone.tel} data-loc="header" class="hidden text-right no-underline md:block">
+        <span class="block whitespace-nowrap text-xs font-semibold uppercase tracking-wide text-muted">Call or Text · Anytime</span>
+        <span class="flex items-center gap-1.5 whitespace-nowrap font-heading text-2xl font-extrabold text-ink hover:text-red-dark">
+          <Icon name="phone" class="h-5 w-5 text-red" />{business.phone.display}
+        </span>
+      </a>
+      <a href={business.phone.tel} data-loc="header-mobile" class="inline-flex h-11 w-11 items-center justify-center rounded-lg border-2 border-ink text-ink md:hidden" aria-label={`Call ${business.phone.display}`}>
+        <Icon name="phone" class="h-5 w-5" />
+      </a>
+      <a href="/get-estimate/" class="btn btn-red hidden whitespace-nowrap !px-4 !py-2.5 !text-base sm:inline-flex">Free Estimate</a>
+      <button type="button" id="menu-btn" class="inline-flex h-11 w-11 items-center justify-center rounded-lg text-ink xl:hidden" aria-expanded="false" aria-controls="mobile-menu" aria-label="Open menu" data-menu>
+        <Icon name="menu" class="h-7 w-7 menu-open" />
+        <Icon name="close" class="hidden h-7 w-7 menu-close" />
+      </button>
+    </div>
+  </div>
+
+  <nav id="mobile-menu" class="hidden border-t border-gray-200 bg-white xl:hidden" aria-label="Mobile">
+    <ul class="container-x divide-y divide-gray-100 py-2 font-heading text-lg font-semibold text-ink">
+      {nav.map((n) => (<li><a href={n.href} class="block py-3 no-underline">{n.label}</a></li>))}
+      <li class="py-3">
+        <p class="mb-2 text-sm font-bold uppercase tracking-wide text-muted">All services</p>
+        <ul class="grid grid-cols-1 gap-1 text-base font-medium">
+          {services.map((s) => (<li><a href={s.href} class="block py-1.5 no-underline">{s.name}</a></li>))}
+        </ul>
+      </li>
+      <li class="py-4"><a href="/get-estimate/" class="btn btn-red w-full">Get a Free Estimate</a></li>
+    </ul>
+  </nav>
+</header>
+
+<script>
+  const btn = document.getElementById('menu-btn');
+  const menu = document.getElementById('mobile-menu');
+  btn?.addEventListener('click', () => {
+    const open = btn.getAttribute('aria-expanded') === 'true';
+    btn.setAttribute('aria-expanded', String(!open));
+    btn.setAttribute('aria-label', open ? 'Open menu' : 'Close menu');
+    menu?.classList.toggle('hidden', open);
+    btn.querySelector('.menu-open')?.classList.toggle('hidden', !open);
+    btn.querySelector('.menu-close')?.classList.toggle('hidden', open);
+  });
+</script>

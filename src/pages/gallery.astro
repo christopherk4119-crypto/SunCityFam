@@ -1,0 +1,96 @@
+---
+import { Image } from 'astro:assets';
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import PageHeader from '../components/PageHeader.astro';
+import PhotoPlaceholder from '../components/PhotoPlaceholder.astro';
+import BeforeAfter from '../components/BeforeAfter.astro';
+import CtaBand from '../components/CtaBand.astro';
+
+const serviceLinks: Record<string, { label: string; href: string }> = {
+  'hail-damage-replacement': { label: 'Hail Damage', href: '/hail-damage-roof-repair-lethbridge/' },
+  'roof-replacement': { label: 'Roof Replacement', href: '/roof-replacement-lethbridge/' },
+  'architectural-upgrade': { label: 'Architectural Upgrade', href: '/architectural-shingles/' },
+  'cedar-shake-removal': { label: 'Cedar Shake Removal', href: '/cedar-shake-removal/' },
+  'metal-roofing': { label: 'Metal Roofing', href: '/metal-roofing-lethbridge/' },
+  'open-metal-valleys': { label: 'Metal Valleys', href: '/metal-roofing-lethbridge/' },
+  'roof-repair': { label: 'Roof Repair', href: '/roof-repair-lethbridge/' },
+  gutters: { label: 'Gutters', href: '/gutters-lethbridge/' },
+  cleanup: { label: 'Cleanup', href: '/yard-clean-promise/' },
+  crew: { label: 'Crew', href: '/why-choose-us/' },
+  other: { label: 'Other', href: '/services/' },
+};
+const projects = await getCollection('projects');
+const present = [...new Set(projects.map((p) => p.data.service))];
+const pairs = [...new Set(projects.map((p) => p.data.pairId).filter(Boolean))]
+  .map((id) => ({
+    before: projects.find((p) => p.data.pairId === id && p.data.shotType === 'before'),
+    after: projects.find((p) => p.data.pairId === id && p.data.shotType !== 'before'),
+  }))
+  .filter((x) => x.before && x.after);
+---
+<Base
+  title="Roofing Project Gallery Lethbridge | Sun City Roofing"
+  description="Real roofing projects by Sun City Roofing in Lethbridge and area: hail damage replacements, IKO architectural shingles, cedar shake removal and more."
+  breadcrumbs={[{ name: 'Gallery', path: '/gallery/' }]}
+>
+  <PageHeader h1="Roofing Project Gallery" intro="Real jobs, photographed by our crew in Lethbridge and around Southern Alberta. No stock photos." />
+
+  {pairs.length > 0 && (
+    <section class="section !pt-2 bg-white">
+      <div class="container-x">
+        <h2 class="mb-6">Before &amp; After</h2>
+        <div class="grid gap-8 lg:grid-cols-2">
+          {pairs.map((x) => <BeforeAfter before={x.before!.data.image} after={x.after!.data.image} beforeAlt={x.before!.data.alt} afterAlt={x.after!.data.alt} caption={x.after!.data.caption} />)}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <section class="section !pt-2 bg-white">
+    <div class="container-x">
+      {projects.length > 0 ? (
+        <>
+          <div class="mb-6 flex flex-wrap gap-2" role="group" aria-label="Filter projects by service">
+            <button type="button" class="filter-btn rounded-full border-2 border-ink bg-ink px-4 py-2 font-semibold text-white" data-filter="all" aria-pressed="true">All</button>
+            {present.map((s) => <button type="button" class="filter-btn rounded-full border-2 border-gray-300 bg-white px-4 py-2 font-semibold text-ink" data-filter={s} aria-pressed="false">{serviceLinks[s].label}</button>)}
+          </div>
+          <ul class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3" id="gallery-grid">
+            {projects.map((p) => (
+              <li data-service={p.data.service}>
+                <a href={serviceLinks[p.data.service].href} class="block no-underline">
+                  <figure>
+                    <Image src={p.data.image} alt={p.data.alt} width={800} widths={[400, 800]} sizes="(min-width:1024px) 360px, (min-width:640px) 50vw, 100vw" class="aspect-[4/3] w-full rounded-xl object-cover" loading="lazy" />
+                    <figcaption class="mt-2 text-sm font-medium text-muted">{p.data.caption}</figcaption>
+                  </figure>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </>
+      ) : (
+        <>
+          {/* TODO: add real job photos (see README → Adding projects) */}
+          <p class="mb-6 text-lg">We're adding photos from recent jobs. In the meantime, see more of our work on <a href="https://www.facebook.com/people/Sun-City-Roofing/61578647018627/" target="_blank" rel="noopener" class="font-semibold text-red-dark">Facebook</a>.</p>
+          <ul class="grid gap-5 sm:grid-cols-3">{['hail', 'roof', 'shake'].map((i) => <li><PhotoPlaceholder icon={i} /></li>)}</ul>
+        </>
+      )}
+    </div>
+  </section>
+  <CtaBand />
+</Base>
+
+<script>
+  const btns = document.querySelectorAll<HTMLButtonElement>('.filter-btn');
+  const items = document.querySelectorAll<HTMLElement>('#gallery-grid > li');
+  btns.forEach((b) => b.addEventListener('click', () => {
+    const f = b.dataset.filter;
+    btns.forEach((x) => {
+      const on = x === b;
+      x.setAttribute('aria-pressed', String(on));
+      x.classList.toggle('bg-ink', on); x.classList.toggle('text-white', on); x.classList.toggle('border-ink', on);
+      x.classList.toggle('bg-white', !on); x.classList.toggle('text-ink', !on); x.classList.toggle('border-gray-300', !on);
+    });
+    items.forEach((i) => { i.hidden = f !== 'all' && i.dataset.service !== f; });
+  }));
+</script>

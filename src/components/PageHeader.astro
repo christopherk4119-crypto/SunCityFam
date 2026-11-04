@@ -1,0 +1,18 @@
+---
+import { business } from '../config/business';
+interface Props { h1: string; intro?: string; eyebrow?: string; ctas?: boolean }
+const { h1, intro, eyebrow, ctas = true } = Astro.props;
+---
+<section class="bg-white">
+  <div class="container-x py-10 sm:py-14">
+    {eyebrow && <p class="eyebrow mb-2">{eyebrow}</p>}
+    <h1 class="mb-4 max-w-4xl">{h1}</h1>
+    {intro && <p class="max-w-3xl text-lg">{intro}</p>}
+    {ctas && (
+      <div class="mt-6 flex flex-col gap-3 sm:flex-row">
+        <a href={business.phone.tel} data-loc="page-header" class="btn btn-red">📞 Call {business.phone.display}</a>
+        <a href="/get-estimate/" class="btn btn-outline">Get a Free Estimate</a>
+      </div>
+    )}
+  </div>
+</section>

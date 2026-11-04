@@ -1,0 +1,59 @@
+---
+import Logo from './Logo.astro';
+import Icon from './Icon.astro';
+import { business, services, serviceAreas, widerArea, fullAddress } from '../config/business';
+const year = new Date().getFullYear();
+---
+<footer class="bg-ink text-gray-300">
+  <div class="container-x grid gap-10 py-14 sm:grid-cols-2 lg:grid-cols-4">
+    <div>
+      <Logo light class="mb-4 h-11 w-auto" />
+      <address class="not-italic leading-relaxed">
+        <strong class="text-white">{business.name}</strong><br />
+        {business.address.street}<br />
+        {business.address.city}, {business.address.region} {business.address.postalCode}<br />
+        <a href={business.phone.tel} data-loc="footer" class="mt-2 inline-flex items-center gap-2 font-heading text-xl font-bold text-white no-underline hover:underline">
+          <Icon name="phone" class="h-5 w-5" />{business.phone.display}
+        </a><br />
+        <a href={`mailto:${business.email}`} class="text-gray-300 hover:text-white">{business.email}</a>
+      </address>
+      <p class="mt-3 flex items-center gap-2"><Icon name="clock" class="h-5 w-5" />Open 24 hours · {business.hours.copy}</p>
+    </div>
+    <div>
+      <h2 class="mb-4 text-lg text-white">Roofing Services</h2>
+      <ul class="space-y-2">
+        {services.map((s) => (<li><a href={s.href} class="text-gray-300 no-underline hover:text-white hover:underline">{s.name}</a></li>))}
+      </ul>
+    </div>
+    <div>
+      <h2 class="mb-4 text-lg text-white">Service Areas</h2>
+      <ul class="space-y-2">
+        {serviceAreas.map((t) => (
+          <li>{t.slug
+            ? <a href={`/service-areas/${t.slug}/`} class="text-gray-300 no-underline hover:text-white hover:underline">Roofing in {t.name}</a>
+            : <a href="/" class="text-gray-300 no-underline hover:text-white hover:underline">Roofing in {t.name}</a>}</li>
+        ))}
+        <li><a href="/service-areas/" class="text-gray-300 no-underline hover:text-white hover:underline">All of {widerArea}</a></li>
+      </ul>
+    </div>
+    <div>
+      <h2 class="mb-4 text-lg text-white">Company</h2>
+      <ul class="space-y-2">
+        <li><a href="/why-choose-us/" class="text-gray-300 no-underline hover:text-white hover:underline">Why Choose Us</a></li>
+        <li><a href="/yard-clean-promise/" class="text-gray-300 no-underline hover:text-white hover:underline">Yard-Clean Promise</a></li>
+        <li><a href="/gallery/" class="text-gray-300 no-underline hover:text-white hover:underline">Project Gallery</a></li>
+        <li><a href="/reviews/" class="text-gray-300 no-underline hover:text-white hover:underline">Reviews</a></li>
+        <li><a href="/faq/" class="text-gray-300 no-underline hover:text-white hover:underline">FAQ</a></li>
+        <li><a href="/contact/" class="text-gray-300 no-underline hover:text-white hover:underline">Contact</a></li>
+        <li><a href="/get-estimate/" class="text-gray-300 no-underline hover:text-white hover:underline">Free Estimate</a></li>
+        <li><a href={business.social.facebook} rel="noopener" target="_blank" class="inline-flex items-center gap-2 text-gray-300 no-underline hover:text-white hover:underline"><Icon name="facebook" class="h-4 w-4" />Facebook</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="border-t border-white/10">
+    <div class="container-x flex flex-col gap-2 py-6 text-sm text-gray-400 sm:flex-row sm:justify-between">
+      <p>© {year} {business.name} · {fullAddress}</p>
+      <p><a href="/privacy/" class="text-gray-400 hover:text-white">Privacy Policy</a></p>
+    </div>
+  </div>
+</footer>

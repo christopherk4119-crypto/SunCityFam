@@ -1,0 +1,8 @@
+node_modules/
+dist/
+.astro/
+.netlify/
+.DS_Store
+.env
+# Raw phone photos contain GPS EXIF of customers' homes — never commit them
+photos-raw/

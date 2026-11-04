@@ -1,0 +1,32 @@
+---
+import Base from '../layouts/Base.astro';
+import { business, fullAddress } from '../config/business';
+---
+<Base title="Privacy Policy | Sun City Roofing" description="How Sun City Roofing collects, uses and protects the personal information you share through our website." breadcrumbs={[{ name: 'Privacy Policy', path: '/privacy/' }]}>
+  <section class="section !pt-10 bg-white">
+    <div class="container-x prose-roof">
+      {/* TODO: have this reviewed by the owner (and ideally a lawyer). Template written for Alberta PIPA / federal PIPEDA basics. */}
+      <h1 class="mb-6">Privacy Policy</h1>
+      <p><em>Last updated: November 2026</em></p>
+      <p>{business.name} ("we", "us") respects your privacy. This policy explains what personal information we collect through this website, why, and how we protect it, in line with Alberta's <em>Personal Information Protection Act</em> (PIPA).</p>
+      <h2>What we collect</h2>
+      <p>When you fill in our estimate form, we collect your name, phone number, address or town, the service you're interested in, whether your request involves an insurance claim, and any message you include.</p>
+      <p>Like most websites, we may also collect basic, non-identifying usage data (pages visited, device type, approximate location by city) through Google Analytics, to understand how the site is used.</p>
+      <h2>How we use it</h2>
+      <ul>
+        <li>To contact you about your roofing request and prepare your estimate</li>
+        <li>To schedule and complete work you ask us to do</li>
+        <li>To improve our website</li>
+      </ul>
+      <p>We don't sell or rent your personal information, and we don't add you to marketing lists.</p>
+      <h2>Who we share it with</h2>
+      <p>Form submissions are processed by our website host (Netlify) and delivered to our business email. If you ask us to work with your insurance company, we share relevant job details with them at your direction. Otherwise we only disclose information where required by law.</p>
+      <h2>How long we keep it</h2>
+      <p>We keep estimate requests and job records only as long as needed for the purpose they were collected, and for warranty and legal record-keeping.</p>
+      <h2>Your choices</h2>
+      <p>You can ask to see, correct or delete the personal information we hold about you. Contact us using the details below.</p>
+      <h2>Contact</h2>
+      <p>{business.name}<br />{fullAddress}<br /><a href={business.phone.tel}>{business.phone.display}</a> · <a href={`mailto:${business.email}`}>{business.email}</a></p>
+    </div>
+  </section>
+</Base>

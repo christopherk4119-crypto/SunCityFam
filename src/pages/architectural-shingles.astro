@@ -1,0 +1,71 @@
+---
+import ServicePage from '../layouts/ServicePage.astro';
+import ComparisonTable from '../components/ComparisonTable.astro';
+import { business } from '../config/business';
+import { common } from '../data/faqs';
+
+const faqs = [
+  { q: 'Are architectural shingles worth the extra cost over 3-tab?', a: 'In Lethbridge, usually yes. The price difference on a typical house is modest compared to the whole job, and you get a much higher wind rating, better impact resistance, a longer life and a better-looking roof. With our Chinook winds, 3-tab shingles tend to need repairs much sooner.' },
+  { q: 'Can I put architectural shingles over my old 3-tab shingles?', a: 'We don\'t recommend it. We tear off the old roof down to the deck so we can replace any bad boards and give the new shingles a flat, solid base to seal to. Layering over old shingles hides problems and shortens the life of the new roof.' },
+  { q: 'What wind speed are architectural shingles rated for?', a: 'It depends on the exact product line and how it\'s installed. Architectural laminate shingles are rated up to roughly 210 km/h (about 130 mph), compared with around 100 km/h (about 60 mph) for basic 3-tab. Chris will show you the rating for the specific shingle on your quote.' },
+  { q: 'Which shingle brand do you use?', a: `We install IKO shingles. Recent jobs used colours like Dual Grey, Dual Brown and Charcoal Grey. ${business.owner} brings samples so you can see them against your house.` },
+  { q: 'Do architectural shingles help with hail?', a: 'They\'re thicker and laminated, so they handle impact better than thin 3-tab. No asphalt shingle is hail-proof, though — a big enough storm will damage any roof. If hail is a major concern, ask about impact-rated options.' },
+  common.cost,
+  common.warranty,
+  common.cleanup,
+];
+---
+<ServicePage
+  title="Architectural Shingles vs 3-Tab | Sun City Roofing"
+  description="Architectural shingles vs 3-tab for Lethbridge homes: wind ratings in km/h, lifespan, hail resistance and cost. IKO shingle upgrades. Free estimate."
+  h1="Architectural Shingles vs 3-Tab: Upgrading Your Lethbridge Roof"
+  intro="Tired of picking shingles out of the yard after every Chinook? Here's an honest comparison of 3-tab and architectural shingles — and why most Lethbridge homeowners upgrade when they re-roof."
+  crumb="Architectural Shingles"
+  serviceType="Architectural shingle roof installation"
+  projectServices={['architectural-upgrade', 'roof-replacement']}
+  icon="layers"
+  faqs={faqs}
+  ctaText="Want to see shingle samples on your house?"
+>
+  <p>If your house was built or last re-roofed before the mid-2000s, there's a good chance it has 3-tab shingles. They were the standard for decades — flat, thin, cut into three tabs per strip. They work, but in Lethbridge they have a tough life. When it's time for a new roof, the question almost everyone asks is: should I upgrade to architectural shingles?</p>
+
+  <h2>The quick comparison</h2>
+  <div class="my-8"><ComparisonTable /></div>
+
+  <h2>What's the difference?</h2>
+  <h3>3-tab shingles</h3>
+  <p>A single layer of asphalt-coated mat, cut into three equal tabs. They're lighter and cheaper, and they lie flat with a uniform, brick-like pattern. Typical life is around 15–20 years, and a typical wind rating is about 100 km/h (≈60 mph).</p>
+  <h3>Architectural (laminate) shingles</h3>
+  <p>Two or more layers laminated together, so they're thicker and heavier. The layers create a dimensional, shadowed look that reads more like wood shake or slate from the street. Depending on the product line and installation, they're rated up to roughly 210 km/h (≈130 mph) {/* TODO: tie to actual IKO product used */}, and they generally last longer and handle impact better.</p>
+
+  <h2>Why it matters more in Lethbridge</h2>
+  <p>Shingle choice matters more here than in most of Canada, for three reasons:</p>
+  <ul>
+    <li><strong>Wind.</strong> Lethbridge is one of the windiest cities in the country. Chinook gusts regularly hit 100 km/h and sometimes much higher. That's right at — or over — what a 3-tab shingle is built for. It's why so many older roofs in town lose shingles every winter.</li>
+    <li><strong>Hail.</strong> Southern Alberta storms between June and August can bruise and crack shingles. Thicker laminate shingles take a hit better than thin 3-tab.</li>
+    <li><strong>Freeze-thaw.</strong> A Chinook can take you from -20°C to +10°C in a day and back again. Those swings stress shingles and seal strips. A heavier shingle with a strong seal holds up better.</li>
+  </ul>
+  <p>Put those together and the "cheaper" shingle often isn't cheaper over the life of the roof — not once you add a few wind repairs and an earlier replacement.</p>
+
+  <h2>What does the upgrade cost?</h2>
+  <p>On a full re-roof, most of the cost is labour, tear-off, underlayment, flashing and disposal — that's the same whichever shingle you pick. The shingle upgrade itself is usually a modest share of the total. Your written quote will show the price for each option side by side so you can decide.</p>
+  <p>And if you've got a written estimate from another roofer, we'll beat it. {business.bestPriceFinePrint}</p>
+
+  <h2>IKO architectural shingles</h2>
+  <p>We install IKO shingles. Popular colours on recent jobs include <strong>Dual Grey</strong>, <strong>Dual Brown</strong> and <strong>Charcoal Grey</strong> — they suit most Lethbridge siding and brick, and they hide dirt and weathering well. {/* TODO: confirm product lines (e.g. Cambridge, Dynasty) and their exact wind/warranty specs */}</p>
+  <p>{business.owner} brings samples to your house and explains the differences between product lines — wind rating, weight, warranty and look — so you can make the call yourself. No pressure and no upsell.</p>
+
+  <h2>How we do a 3-tab to architectural upgrade</h2>
+  <ol>
+    <li>Free inspection and written quote with both options priced</li>
+    <li>Full tear-off of the old 3-tab roof down to the deck</li>
+    <li>Replace any soft or damaged decking</li>
+    <li>Ice and water protection at eaves and valleys, plus underlayment</li>
+    <li>New IKO architectural shingles, ridge caps, vents and flashing — or <a href="/metal-roofing-lethbridge/">open metal valleys</a> if you want them</li>
+    <li>Magnetic nail sweep, debris haul-away and final walkthrough under our <a href="/yard-clean-promise/">Yard-Clean Promise</a></li>
+  </ol>
+  <p>See the full process on our <a href="/roof-replacement-lethbridge/">roof replacement</a> page. Got hail damage? An insurance-covered replacement is a good time to upgrade — read about <a href="/hail-damage-roof-repair-lethbridge/">hail damage claims</a>.</p>
+
+  <h2>Book a shingle consultation</h2>
+  <p>We do architectural shingle upgrades across Lethbridge, <a href="/service-areas/coaldale/">Coaldale</a>, <a href="/service-areas/claresholm/">Claresholm</a> and <a href="/service-areas/">Southern Alberta</a>. Call <a href={business.phone.tel} data-loc="architectural-copy">{business.phone.display}</a> or <a href="/get-estimate/">get a free estimate</a> with both options priced.</p>
+</ServicePage>

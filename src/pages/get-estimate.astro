@@ -1,0 +1,27 @@
+---
+import Base from '../layouts/Base.astro';
+import EstimateForm from '../components/EstimateForm.astro';
+import Check from '../components/Check.astro';
+import ReviewsBy from '../components/ReviewsBy.astro';
+import { business } from '../config/business';
+---
+<Base
+  title="Free Roofing Estimate Lethbridge | Sun City Roofing"
+  description="Get a free, no-obligation roofing estimate in Lethbridge. Same-day quotes often available. We beat any written estimate. Call (403) 929-5588."
+  breadcrumbs={[{ name: 'Free Estimate', path: '/get-estimate/' }]}
+>
+  <section class="section !pt-10 bg-red-50">
+    <div class="container-x grid gap-10 lg:grid-cols-2">
+      <div>
+        <h1 class="mb-4">Get a Free Roofing Estimate</h1>
+        <p class="mb-6 text-lg">Fastest way: call <a href={business.phone.tel} data-loc="estimate-copy" class="font-bold text-red-dark">{business.phone.display}</a>. {business.hours.copy} Or fill in the form and {business.owner} will call you back.</p>
+        <a href={business.phone.tel} data-loc="estimate-btn" class="btn btn-red mb-8 w-full sm:w-auto">📞 Call {business.phone.display}</a>
+        <ul class="mb-8 space-y-3">
+          {['Free and no obligation', 'Detailed written quote — no hidden fees', 'Same-day quotes often available', 'We beat any written estimate', 'Help with hail & insurance claims'].map((t) => <li class="flex gap-3"><Check />{t}</li>)}
+        </ul>
+        <ReviewsBy placement="speed" limit={1} />
+      </div>
+      <EstimateForm id="estimate" />
+    </div>
+  </section>
+</Base>

@@ -1,0 +1,101 @@
+---
+/**
+ * Shared layout for service pages: hero (real photo or placeholder) → body copy (slot) →
+ * project strip → insurance steps (optional) → related services → FAQ → CTA band.
+ */
+import { Image, getImage } from 'astro:assets';
+import { getCollection } from 'astro:content';
+import Base from './Base.astro';
+import Icon from '../components/Icon.astro';
+import PhotoPlaceholder from '../components/PhotoPlaceholder.astro';
+import ProjectStrip from '../components/ProjectStrip.astro';
+import InsuranceSteps from '../components/InsuranceSteps.astro';
+import ServiceGrid from '../components/ServiceGrid.astro';
+import Faq from '../components/Faq.astro';
+import CtaBand from '../components/CtaBand.astro';
+import CtaInline from '../components/CtaInline.astro';
+import EstimateForm from '../components/EstimateForm.astro';
+import ServiceAreasList from '../components/ServiceAreasList.astro';
+import { business } from '../config/business';
+import { faqSchema, serviceSchema, imageSchema } from '../lib/schema';
+
+interface Props {
+  title: string;
+  description: string;
+  h1: string;
+  intro: string;
+  crumb: string;
+  serviceType: string;
+  projectServices: string[];
+  icon: string;
+  faqs: { q: string; a: string }[];
+  showInsurance?: boolean;
+  ctaText?: string;
+}
+const p = Astro.props;
+const path = Astro.url.pathname;
+const projects = await getCollection('projects');
+const hero = projects.find((x) => x.data.heroFor === path)
+  ?? projects.find((x) => p.projectServices.includes(x.data.service) && x.data.shotType !== 'before' && !x.data.heroFor);
+const heroOpt = hero ? await getImage({ src: hero.data.image, width: 1600, format: 'webp' }) : null;
+
+const schema: Record<string, unknown>[] = [
+  serviceSchema({ name: p.h1, description: p.description, path, serviceType: p.serviceType }),
+  faqSchema(p.faqs),
+];
+if (hero && heroOpt) schema.push(imageSchema({ url: new URL(heroOpt.src, Astro.site).href, caption: hero.data.caption }));
+---
+<Base title={p.title} description={p.description} breadcrumbs={[{ name: 'Services', path: '/services/' }, { name: p.crumb, path }]} schema={schema} preloadImage={heroOpt?.src}>
+  <section class="bg-white">
+    <div class="container-x grid items-center gap-8 py-10 lg:grid-cols-2 lg:py-14">
+      <div>
+        <h1 class="mb-4">{p.h1}</h1>
+        <p class="mb-6 text-lg">{p.intro}</p>
+        <div class="flex flex-col gap-3 sm:flex-row">
+          <a href={business.phone.tel} data-loc="service-hero" class="btn btn-red">📞 Call {business.phone.display}</a>
+          <a href="#estimate" class="btn btn-outline">Get a Free Estimate</a>
+        </div>
+        <p class="mt-4 text-sm font-semibold text-muted">{business.hours.copy} · Free, no-obligation quotes</p>
+      </div>
+      {hero
+        ? <figure><Image src={hero.data.image} alt={hero.data.alt} width={1600} widths={[800, 1600]} sizes="(min-width:1024px) 560px, 100vw" loading="eager" fetchpriority="high" class="aspect-[4/3] w-full rounded-xl object-cover shadow-lg" /><figcaption class="mt-2 text-sm font-medium text-muted">{hero.data.caption}</figcaption></figure>
+        : <PhotoPlaceholder icon={p.icon} label={`${p.crumb} photo coming soon`} />}
+    </div>
+  </section>
+
+  <section class="section !pt-6 bg-white">
+    <div class="container-x prose-roof">
+      <slot />
+    </div>
+  </section>
+
+  <CtaInline text={p.ctaText} />
+
+  <section class="section bg-white">
+    <div class="container-x">
+      <ProjectStrip services={p.projectServices} icon={p.icon} heading="Recent projects" excludeHeroFor={path} />
+      <a href="/gallery/" class="mt-6 inline-flex items-center gap-1 font-heading font-bold text-red-dark">See the full project gallery <Icon name="arrow" class="h-4 w-4" /></a>
+    </div>
+  </section>
+
+  {p.showInsurance && <InsuranceSteps tint />}
+
+  <section class="section bg-gray-50">
+    <div class="container-x">
+      <h2 class="mb-8">Related Roofing Services</h2>
+      <ServiceGrid exclude={path} />
+    </div>
+  </section>
+
+  <Faq faqs={p.faqs} />
+
+  <ServiceAreasList />
+
+  <section class="section bg-red-50">
+    <div class="container-x max-w-3xl">
+      <EstimateForm />
+    </div>
+  </section>
+
+  <CtaBand />
+</Base>

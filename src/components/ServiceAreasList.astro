@@ -1,0 +1,17 @@
+---
+import Icon from './Icon.astro';
+import { serviceAreas, widerArea } from '../config/business';
+---
+<section class="section bg-white">
+  <div class="container-x text-center">
+    <p class="eyebrow">Where we work</p>
+    <h2 class="mb-4">Roofing in Lethbridge & {widerArea}</h2>
+    <p class="mx-auto mb-8 max-w-2xl text-lg">Lethbridge is home — most of our jobs are right here in town. We also roof in Coaldale, Claresholm and across {widerArea}. Not sure if we come out your way? Call and ask.</p>
+    <ul class="flex flex-wrap justify-center gap-3">
+      {serviceAreas.map((t) => (
+        <li><a href={t.slug ? `/service-areas/${t.slug}/` : '/service-areas/'} class="inline-flex items-center gap-2 rounded-full border border-gray-300 bg-white px-5 py-2.5 font-heading font-semibold text-ink no-underline hover:border-ink"><Icon name="pin" class="h-4 w-4 text-red" />Roofing in {t.name}</a></li>
+      ))}
+      <li><a href="/service-areas/" class="inline-flex items-center gap-2 rounded-full border border-gray-300 bg-white px-5 py-2.5 font-heading font-semibold text-ink no-underline hover:border-ink"><Icon name="pin" class="h-4 w-4 text-red" />Rest of {widerArea}</a></li>
+    </ul>
+  </div>
+</section>

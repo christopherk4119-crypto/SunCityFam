@@ -1,0 +1,84 @@
+---
+import ServicePage from '../layouts/ServicePage.astro';
+import ReviewsBy from '../components/ReviewsBy.astro';
+import ComparisonTable from '../components/ComparisonTable.astro';
+import { business } from '../config/business';
+import { common } from '../data/faqs';
+
+const faqs = [
+  common.cost,
+  { q: 'How do I know if I need a new roof or just a repair?', a: 'If the problem is in one spot — a few missing shingles, a leaking vent, damaged flashing — a repair usually makes sense. If the shingles are curling, losing granules everywhere, or the roof is 20+ years old and leaking in more than one place, replacement is usually the better money. We\'ll tell you honestly which one you need.' },
+  common.timeline,
+  { q: 'Do you tear off the old roof or shingle over it?', a: 'We tear off down to the deck. That\'s the only way to see and fix soft or rotten boards, and it gives the new shingles a flat, solid base to seal to.' },
+  common.winter,
+  common.warranty,
+  common.home,
+  common.cleanup,
+];
+---
+<ServicePage
+  title="Roof Replacement Lethbridge | Sun City Roofing"
+  description="Full roof replacement in Lethbridge with IKO architectural shingles. Detailed written quotes, we beat any written estimate, clean yard. Free estimate."
+  h1="Roof Replacement in Lethbridge"
+  intro="A full tear-off and re-roof done properly: honest written quote, quality IKO shingles, solid decking underneath and a yard that's spotless when we leave."
+  crumb="Roof Replacement"
+  serviceType="Residential roof replacement"
+  projectServices={['roof-replacement', 'architectural-upgrade', 'hail-damage-replacement']}
+  icon="roof"
+  faqs={faqs}
+  ctaText="Thinking about a new roof?"
+>
+  <p>A new roof is one of the biggest things you'll ever buy for your house, and most people only do it once or twice. You shouldn't have to guess what's in the quote, who's going to be on your roof, or whether the crew will leave nails in your lawn. Here's exactly how we do a roof replacement in Lethbridge, start to finish.</p>
+
+  <h2>Signs it's time to replace your roof</h2>
+  <ul>
+    <li><strong>Age.</strong> Most 3-tab roofs last 15–20 years here. If yours is in that range, it's living on borrowed time.</li>
+    <li><strong>Curling, cupping or cracked shingles.</strong> Our hot, dry summers and UV exposure bake the oils out of asphalt shingles.</li>
+    <li><strong>Bald spots and granules in the eavestroughs.</strong> Once the granules are gone, the shingle breaks down quickly.</li>
+    <li><strong>Shingles blowing off every Chinook.</strong> If you're replacing a few tabs every winter, the seal strips have given up.</li>
+    <li><strong>Leaks in more than one spot</strong>, or a sagging roof deck.</li>
+    <li><strong>Hail damage</strong> — see our <a href="/hail-damage-roof-repair-lethbridge/">hail damage and insurance claims</a> page.</li>
+  </ul>
+  <p>Not sure? Call <a href={business.phone.tel} data-loc="replacement-copy">{business.phone.display}</a>. If a <a href="/roof-repair-lethbridge/">repair</a> will get you a few more good years, we'll say so.</p>
+
+  <h2>What's in a Sun City roof replacement</h2>
+  <ol>
+    <li><strong>Free inspection and written quote.</strong> {business.owner} measures the roof, checks the attic and ventilation, and gives you a detailed line-by-line quote. Same-day quotes are often available.</li>
+    <li><strong>Shingle walkthrough.</strong> He brings samples and explains the options — product lines, colours, wind ratings — so you pick what's right for your house and budget.</li>
+    <li><strong>Protect the property.</strong> We protect landscaping, windows and siding before tear-off starts.</li>
+    <li><strong>Full tear-off.</strong> Old shingles and underlayment come off down to the deck.</li>
+    <li><strong>Deck inspection.</strong> Soft, rotten or delaminated boards get replaced so the new roof has a solid base. If you're coming off <a href="/cedar-shake-removal/">cedar shakes</a>, we re-sheet with OSB.</li>
+    <li><strong>Ice and water protection</strong> at the eaves and valleys, where freeze-thaw and ice dams do the most damage.</li>
+    <li><strong>Underlayment, drip edge and flashing</strong>, then new IKO architectural shingles, vents and ridge caps.</li>
+    <li><strong>Yard-Clean Promise.</strong> Magnetic nail sweep, every piece of debris hauled away, and a final walkthrough with you.</li>
+  </ol>
+
+  <h2>Shingles built for Lethbridge weather</h2>
+  <p>Lethbridge is one of the windiest cities in Canada. Chinook gusts regularly top 100 km/h, which is right around what a basic 3-tab shingle is rated for. Add summer hail and big temperature swings in winter, and you need a shingle that can take it.</p>
+  <p>That's why most of our replacements use IKO architectural (laminate) shingles. They're thicker, heavier and have a much higher wind rating than 3-tab, plus the dimensional look most homeowners prefer.</p>
+  <div class="my-8"><ComparisonTable /></div>
+  <p>Read the full breakdown on our <a href="/architectural-shingles/">architectural shingles vs 3-tab</a> page. Prefer metal? We also do <a href="/metal-roofing-lethbridge/">metal roofing and open metal valleys</a>.</p>
+
+  <h2>What does a new roof cost in Lethbridge?</h2>
+  <p>Honest answer: it depends. The things that move the price most are:</p>
+  <ul>
+    <li>Roof size and how many slopes, valleys and penetrations it has</li>
+    <li>Pitch — steep roofs take more time and safety equipment</li>
+    <li>How many layers have to come off</li>
+    <li>How much decking needs replacing (we can't know for sure until tear-off, and your quote explains how that's handled)</li>
+    <li>The shingle line you choose</li>
+  </ul>
+  <p>For a real example, one recent job was a {business.priceProof.replace('Complete ', 'complete ')}. {/* TODO: confirm figure */} Your number will be in your written quote — and if you have a written estimate from someone else, we'll beat it. {business.bestPriceFinePrint}</p>
+  <div class="my-8"><ReviewsBy placement="pricing" limit={2} cols="md:grid-cols-2" /></div>
+
+  <h2>Can you replace a roof in winter?</h2>
+  <p>Yes. We work year-round. Southern Alberta has plenty of mild, dry winter days — Chinooks can push the temperature well above freezing in the middle of January. We schedule around the forecast and use cold-weather installation practices so the shingles seal properly. If a leaking roof can't wait until spring, it doesn't have to.</p>
+
+  <h2>A roof that's still good years from now</h2>
+  <p>The real test of a roof replacement isn't the day the crew leaves — it's how it looks after five winters of Chinooks and a few hailstorms. We'd rather do it right once than come back to fix shortcuts.</p>
+  <div class="my-8"><ReviewsBy placement="longevity" limit={1} /></div>
+
+  <h2>Roof replacement across Lethbridge and area</h2>
+  <p>We replace roofs all over Lethbridge — West Lethbridge, the north side, south side and the older neighbourhoods near downtown — plus <a href="/service-areas/coaldale/">Coaldale</a>, <a href="/service-areas/claresholm/">Claresholm</a> and the rest of <a href="/service-areas/">Southern Alberta</a>. Houses, garages, and cabins too.</p>
+  <p>Ready to see your number? <a href="/get-estimate/">Get a free roof replacement estimate</a> or call {business.phone.display}.</p>
+</ServicePage>

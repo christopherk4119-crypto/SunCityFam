@@ -1,0 +1,70 @@
+---
+import ServicePage from '../layouts/ServicePage.astro';
+import { business } from '../config/business';
+import { common } from '../data/faqs';
+
+const faqs = [
+  { q: 'Is it eavestrough or gutter?', a: 'Same thing. Most Canadians say eavestrough; gutter is the American term. Either way, it\'s the channel along the edge of your roof that carries water to the downspouts.' },
+  { q: 'How often should eavestroughs be cleaned in Lethbridge?', a: 'At least once a year, ideally in the fall after the leaves drop and before freeze-up. Homes with big trees nearby may need it twice. Clogged eavestroughs overflow, freeze solid and can cause ice dams.' },
+  { q: 'Should I replace my eavestroughs when I get a new roof?', a: 'If they\'re dented, sagging, leaking at the seams or pulling away from the fascia, doing them at the same time as the roof is efficient. If they\'re in good shape, keep them. We\'ll tell you which.' },
+  { q: 'Can hail damage eavestroughs?', a: 'Yes. Hail often dents eavestroughs and downspouts, and that damage may be part of a hail insurance claim. We document it along with the roof.' },
+  { q: 'How much do new eavestroughs cost?', a: `It depends on the length of your roof edges, the number of corners and downspouts, and the material. We measure and give you a written price first. Call ${business.phone.display}.` },
+  common.winter,
+  common.home,
+  common.cleanup,
+];
+---
+<ServicePage
+  title="Gutters & Eavestroughs Lethbridge | Sun City Roofing"
+  description="Eavestrough & gutter installation, repair and cleaning in Lethbridge. Keep water off your foundation and stop ice dams. Call (403) 929-5588."
+  h1="Gutter & Eavestrough Installation, Repair & Cleaning in Lethbridge"
+  intro="Overflowing, sagging or leaking eavestroughs? We install, repair and clean gutters across Lethbridge so water goes where it should — away from your roof and foundation."
+  crumb="Gutters & Eavestroughs"
+  serviceType="Gutter and eavestrough installation, repair and cleaning"
+  projectServices={['gutters']}
+  icon="gutter"
+  faqs={faqs}
+  ctaText="Eavestroughs overflowing or sagging?"
+>
+  {/* TODO: owner to confirm gutter scope — seamless install? materials/colours? downspout extensions? Adjust copy to match. */}
+  <p>Your eavestroughs do one job: catch the water coming off your roof and move it away from the house. When they're clogged, sagging or leaking, that water ends up behind your fascia, down your siding, in your window wells and against your foundation. In Lethbridge, where snow melts and refreezes all winter, bad gutters also feed ice dams that back water up under your shingles.</p>
+
+  <h2>Eavestrough services</h2>
+  <ul>
+    <li><strong>New eavestrough installation</strong> — on new roofs or as a stand-alone replacement</li>
+    <li><strong>Eavestrough repair</strong> — leaking seams and corners, sagging runs, loose hangers, pulled-away sections</li>
+    <li><strong>Downspouts</strong> — replacement, re-routing and extensions so water drains away from the foundation</li>
+    <li><strong>Gutter cleaning</strong> — leaves, shingle granules, and debris cleared and downspouts flushed</li>
+    <li><strong>Hail-damaged eavestroughs</strong> — documented with your <a href="/hail-damage-roof-repair-lethbridge/">hail damage roof claim</a></li>
+  </ul>
+
+  <h2>Signs your eavestroughs need attention</h2>
+  <ul>
+    <li>Water spilling over the edge during rain</li>
+    <li>Sections sagging or pulling away from the fascia</li>
+    <li>Drips or rust stains at seams and corners</li>
+    <li>Peeling paint or rot on the fascia boards</li>
+    <li>Pooling water or erosion along the foundation</li>
+    <li>Big icicles and ice build-up along the eaves in winter</li>
+    <li>Dents from hail</li>
+  </ul>
+
+  <h2>Why gutters matter in Lethbridge</h2>
+  <p>Southern Alberta isn't known for heavy rain, but our gutters work hard anyway:</p>
+  <ul>
+    <li><strong>Chinook melts.</strong> A warm Chinook can melt a roof's worth of snow in an afternoon. If the eavestroughs are clogged or frozen, that water has nowhere to go.</li>
+    <li><strong>Freeze-thaw.</strong> Water left sitting in eavestroughs freezes overnight, adds weight, pulls hangers loose and opens seams.</li>
+    <li><strong>Summer storms.</strong> Short, heavy downpours during hail season can overwhelm undersized or clogged gutters.</li>
+    <li><strong>Wind.</strong> Loose eavestroughs rattle, bend and get ripped off in high winds.</li>
+  </ul>
+
+  <h2>Gutters and your roof go together</h2>
+  <p>Eavestroughs and roofing are connected. Shingle granules wash into gutters — a lot of granules is a sign your <a href="/roof-replacement-lethbridge/">roof may be near the end of its life</a>. Ice dams caused by blocked gutters can push water under the bottom rows of shingles and cause leaks that look like a <a href="/roof-repair-lethbridge/">roof problem</a>. And when you replace a roof, it's the easiest time to replace tired eavestroughs too, because the edge of the roof is already open.</p>
+  <p>When we're on your roof for any job, we'll take a look at your eavestroughs and tell you honestly whether they need work.</p>
+
+  <h2>Fall gutter cleaning</h2>
+  <p>The best time to clean eavestroughs here is late fall, after the leaves come down and before everything freezes. We clear out leaves, needles and granules, flush the downspouts and check for loose hangers and leaking seams while we're up there.</p>
+
+  <h2>Eavestroughs across Lethbridge and area</h2>
+  <p>We install, repair and clean eavestroughs across Lethbridge, <a href="/service-areas/coaldale/">Coaldale</a>, <a href="/service-areas/claresholm/">Claresholm</a> and <a href="/service-areas/">Southern Alberta</a>. Call <a href={business.phone.tel} data-loc="gutters-copy">{business.phone.display}</a> or <a href="/get-estimate/">request a free eavestrough estimate</a>.</p>
+</ServicePage>

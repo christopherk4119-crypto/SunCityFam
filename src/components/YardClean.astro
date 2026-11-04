@@ -1,0 +1,25 @@
+---
+import Check from './Check.astro';
+import ReviewsBy from './ReviewsBy.astro';
+interface Props { full?: boolean }
+const { full = false } = Astro.props;
+const items = [
+  ['Magnetic nail sweep', 'We roll a magnetic sweeper over your lawn, driveway, flower beds and sidewalks — more than once.'],
+  ['Complete debris haul-away', 'Old shingles, underlayment, wrappers and scrap all leave with us. No bin left sitting on your driveway for a week.'],
+  ['Final yard walkthrough', 'Before we leave, we walk the yard with you. If you spot something, we pick it up on the spot.'],
+];
+---
+<section class="section bg-white">
+  <div class="container-x grid items-center gap-10 lg:grid-cols-2">
+    <div>
+      <p class="eyebrow">Yard-Clean Promise</p>
+      <h2 class="mb-4">Safe for Kids and Pets the Moment We Leave</h2>
+      <p class="mb-6 text-lg">A new roof shouldn't leave roofing nails in your lawn. Every job ends with the same cleanup routine — 100% cleanup, guaranteed.</p>
+      <ul class="space-y-4">
+        {items.map(([t, d]) => (<li class="flex gap-3"><Check /><div><strong class="font-heading text-lg text-ink">{t}</strong><p class="text-ink-soft">{d}</p></div></li>))}
+      </ul>
+      {!full && <a href="/yard-clean-promise/" class="mt-6 inline-block font-heading font-bold text-red-dark">How our Yard-Clean Promise works →</a>}
+    </div>
+    <ReviewsBy placement="cleanup" limit={1} />
+  </div>
+</section>

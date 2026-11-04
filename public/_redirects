@@ -1,0 +1,28 @@
+# 301 redirects — Netlify format. Cloudflare Pages reads the same file.
+# TODO: compare against the OLD site's real URLs (Google Search Console → Pages, or the old sitemap)
+# and add a line for every old URL that doesn't exist on the new site.
+
+# Common legacy variants of kept pages
+/index.html              /                                   301
+/gallery.html            /gallery/                           301
+/reviews.html            /reviews/                           301
+/yard-clean-promise.html /yard-clean-promise/                301
+/why-choose-us.html      /why-choose-us/                     301
+/get-estimate.html       /get-estimate/                      301
+/contact-us/             /contact/                           301
+/contact-us.html         /contact/                           301
+/services.html           /services/                          301
+/estimate/               /get-estimate/                      301
+/free-estimate/          /get-estimate/                      301
+
+# Short / likely-typed URLs
+/hail/                   /hail-damage-roof-repair-lethbridge/ 301
+/hail-damage/            /hail-damage-roof-repair-lethbridge/ 301
+/roof-repair/            /roof-repair-lethbridge/             301
+/roof-replacement/       /roof-replacement-lethbridge/        301
+/metal-roofing/          /metal-roofing-lethbridge/           301
+/gutters/                /gutters-lethbridge/                 301
+/eavestrough/            /gutters-lethbridge/                 301
+/eavestroughs/           /gutters-lethbridge/                 301
+/coaldale/               /service-areas/coaldale/             301
+/claresholm/             /service-areas/claresholm/           301

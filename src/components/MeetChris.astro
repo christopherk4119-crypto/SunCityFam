@@ -1,0 +1,18 @@
+---
+import PhotoPlaceholder from './PhotoPlaceholder.astro';
+import { business } from '../config/business';
+---
+<section class="section bg-gray-50">
+  <div class="container-x grid items-center gap-10 md:grid-cols-[2fr_3fr]">
+    {/* TODO: replace with a real photo of Chris (on a job site, not a headshot in a suit) */}
+    <PhotoPlaceholder icon="handshake" label="Photo of Chris coming soon" aspect="aspect-square" class="mx-auto max-w-sm" />
+    <div>
+      <p class="eyebrow">Meet your roofer</p>
+      <h2 class="mb-4">Hi, I'm {business.owner}.</h2>
+      {/* TODO: owner to review/expand this bio in his own words */}
+      <p class="mb-4 text-lg">I've got {business.experienceCopy}, and I started Sun City Roofing in {business.founded}. The way I run a job is simple: an honest written quote, good materials, and a clean yard when we leave.</p>
+      <p class="mb-6">I'll come out, get on your roof, and walk you through your shingle options in person so you can make the call yourself — no pressure.</p>
+      <a href={business.phone.tel} data-loc="meet-chris" class="btn btn-red">Call {business.owner}: {business.phone.display}</a>
+    </div>
+  </div>
+</section>

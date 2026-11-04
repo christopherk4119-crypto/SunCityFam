@@ -1,0 +1,54 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHeader from '../components/PageHeader.astro';
+import Icon from '../components/Icon.astro';
+import MeetChris from '../components/MeetChris.astro';
+import ReviewsBy from '../components/ReviewsBy.astro';
+import CtaInline from '../components/CtaInline.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { business } from '../config/business';
+const reasons = [
+  { icon: 'phone', title: 'We answer', text: `${business.hours.copy} Customers tell us we were the first roofer to get back to them.` },
+  { icon: 'clock', title: business.experienceCopy, text: `${business.owner} has spent 20+ years on roofs. Sun City Roofing was founded in ${business.founded}.` },
+  { icon: 'tag', title: 'Best-Price Guarantee', text: `We'll beat any written estimate. ${business.bestPriceFinePrint}` },
+  { icon: 'clipboard', title: 'Detailed, written quotes', text: 'Free, no obligation and line-by-line. No hidden fees. Same-day quotes are often available.' },
+  { icon: 'layers', title: 'You choose, informed', text: `${business.owner} walks you through shingle options in person so you can decide for yourself — no pressure.` },
+  { icon: 'broom', title: 'Yard-Clean Promise', text: 'Magnetic nail sweep, debris haul-away and a final walkthrough. Safe for kids and pets.' },
+  { icon: 'hail', title: 'Insurance claims help', text: 'Free hail inspections, photo documentation and we work with your adjuster.' },
+  { icon: 'snow', title: 'Year-round', text: 'We roof in every season, including winter.' },
+  ...(business.licensedInsured ? [{ icon: 'shield', title: 'Licensed & insured', text: business.licensedInsuredDetail }] : []),
+];
+---
+<Base
+  title="Why Choose Us | Sun City Roofing Lethbridge"
+  description="Why Lethbridge homeowners choose Sun City Roofing: fast response, 20+ years' experience, we beat any written estimate and a spotless yard. Free estimate."
+  breadcrumbs={[{ name: 'Why Choose Us', path: '/why-choose-us/' }]}
+>
+  <PageHeader h1="Why Lethbridge Homeowners Choose Sun City Roofing" intro="Straight answers, fair prices and a clean yard. Here's what you get when you call us." />
+  <section class="section !pt-2 bg-white">
+    <div class="container-x">
+      <ul class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        {reasons.map((r) => (
+          <li class="rounded-xl border border-gray-200 bg-white p-6 shadow-sm">
+            <Icon name={r.icon} class="mb-3 h-8 w-8 text-red" />
+            <h2 class="mb-2 text-xl">{r.title}</h2>
+            <p>{r.text}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+  <section class="section bg-red-50">
+    <div class="container-x">
+      <h2 class="mb-8 text-center">In Our Customers' Words</h2>
+      <div class="grid gap-5 md:grid-cols-3">
+        <ReviewsBy placement="hero" limit={1} cols="" />
+        <ReviewsBy placement="speed" limit={1} cols="" />
+        <ReviewsBy placement="longevity" limit={1} cols="" />
+      </div>
+    </div>
+  </section>
+  <MeetChris />
+  <CtaInline />
+  <CtaBand />
+</Base>

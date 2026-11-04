@@ -1,0 +1,35 @@
+---
+import Base from './Base.astro';
+import PageHeader from '../components/PageHeader.astro';
+import ProjectStrip from '../components/ProjectStrip.astro';
+import ServiceGrid from '../components/ServiceGrid.astro';
+import Faq from '../components/Faq.astro';
+import CtaInline from '../components/CtaInline.astro';
+import CtaBand from '../components/CtaBand.astro';
+import EstimateForm from '../components/EstimateForm.astro';
+import { faqSchema } from '../lib/schema';
+interface Props { town: string; slug: string; title: string; description: string; h1: string; intro: string; faqs: { q: string; a: string }[] }
+const p = Astro.props;
+---
+<Base title={p.title} description={p.description} breadcrumbs={[{ name: 'Service Areas', path: '/service-areas/' }, { name: p.town, path: `/service-areas/${p.slug}/` }]} schema={[faqSchema(p.faqs)]}>
+  <PageHeader h1={p.h1} intro={p.intro} eyebrow={`Roofing in ${p.town}, AB`} />
+  <section class="section !pt-4 bg-white">
+    <div class="container-x prose-roof"><slot /></div>
+  </section>
+  <CtaInline text={`Need a roofer in ${p.town}?`} />
+  <section class="section bg-white">
+    <div class="container-x">
+      <!-- Only photos tagged with this town are shown here -->
+      <ProjectStrip town={p.town} heading={`Our work in ${p.town}`} />
+    </div>
+  </section>
+  <section class="section bg-gray-50">
+    <div class="container-x">
+      <h2 class="mb-8">Roofing services in {p.town}</h2>
+      <ServiceGrid />
+    </div>
+  </section>
+  <Faq faqs={p.faqs} title={`${p.town} Roofing FAQ`} />
+  <section class="section bg-red-50"><div class="container-x max-w-3xl"><EstimateForm /></div></section>
+  <CtaBand />
+</Base>

@@ -1,0 +1,16 @@
+---
+import { business } from '../config/business';
+interface Props { title?: string; sub?: string }
+const { title = 'Ready to Get Your Roof Done Right?', sub = `Free, no-obligation quote. ${business.hours.copy}` } = Astro.props;
+---
+<section class="on-red bg-red-dark text-white">
+  <div class="container-x flex flex-col items-center gap-6 py-14 text-center">
+    <h2 class="text-white">{title}</h2>
+    <p class="max-w-2xl text-lg text-white/95">{sub}</p>
+    <a href={business.phone.tel} data-loc="cta-band" class="font-heading text-4xl font-extrabold text-white no-underline hover:underline sm:text-5xl">{business.phone.display}</a>
+    <div class="flex w-full flex-col gap-3 sm:w-auto sm:flex-row">
+      <a href={business.phone.tel} data-loc="cta-band-btn" class="btn btn-white">📞 Call Now</a>
+      <a href="/get-estimate/" class="btn border-2 border-white text-white hover:bg-white/10">Get a Free Estimate</a>
+    </div>
+  </div>
+</section>

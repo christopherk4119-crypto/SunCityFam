@@ -1,0 +1,48 @@
+---
+import { Image } from 'astro:assets';
+import { getCollection } from 'astro:content';
+import PhotoPlaceholder from './PhotoPlaceholder.astro';
+import BeforeAfter from './BeforeAfter.astro';
+interface Props { services?: string[]; town?: string; featuredOnly?: boolean; limit?: number; icon?: string; heading?: string; excludeHeroFor?: string }
+const { services, town, featuredOnly = false, limit = 6, icon = 'roof', heading, excludeHeroFor } = Astro.props;
+let list = await getCollection('projects');
+if (services) list = list.filter((p) => services.includes(p.data.service));
+if (town) list = list.filter((p) => p.data.town?.toLowerCase() === town.toLowerCase());
+if (featuredOnly) list = list.filter((p) => p.data.featured);
+
+// first complete before/after pair in this set
+const pairIds = [...new Set(list.map((p) => p.data.pairId).filter(Boolean))] as string[];
+let pair: { before: any; after: any } | null = null;
+for (const id of pairIds) {
+  const before = list.find((p) => p.data.pairId === id && p.data.shotType === 'before');
+  const after = list.find((p) => p.data.pairId === id && p.data.shotType !== 'before');
+  if (before && after) { pair = { before, after }; break; }
+}
+// The page's hero photo can still appear inside the before/after slider, but not again in the grid
+const grid = list
+  .filter((p) => !pair || (p !== pair.before && p !== pair.after))
+  .filter((p) => !excludeHeroFor || p.data.heroFor !== excludeHeroFor)
+  .slice(0, limit);
+---
+{heading && <h2 class="mb-6">{heading}</h2>}
+{pair && (
+  <div class="mb-8">
+    <BeforeAfter before={pair.before.data.image} after={pair.after.data.image} beforeAlt={pair.before.data.alt} afterAlt={pair.after.data.alt} caption={pair.after.data.caption} />
+  </div>
+)}
+{grid.length > 0 ? (
+  <ul class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+    {grid.map((p) => (
+      <li>
+        <figure>
+          <Image src={p.data.image} alt={p.data.alt} width={800} widths={[400, 800]} sizes="(min-width:1024px) 360px, (min-width:640px) 50vw, 100vw" class="aspect-[4/3] w-full rounded-xl object-cover" loading="lazy" />
+          <figcaption class="mt-2 text-sm font-medium text-muted">{p.data.caption}</figcaption>
+        </figure>
+      </li>
+    ))}
+  </ul>
+) : !pair && (
+  <ul class="grid gap-5 sm:grid-cols-3">
+    {[1, 2, 3].map(() => <li><PhotoPlaceholder icon={icon} label="Job photos coming soon" /></li>)}
+  </ul>
+)}

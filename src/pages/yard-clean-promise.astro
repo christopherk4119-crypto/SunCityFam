@@ -1,0 +1,30 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHeader from '../components/PageHeader.astro';
+import YardClean from '../components/YardClean.astro';
+import ProjectStrip from '../components/ProjectStrip.astro';
+import Faq from '../components/Faq.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { common } from '../data/faqs';
+import { faqSchema } from '../lib/schema';
+const faqs = [
+  common.cleanup,
+  { q: 'What if I find a nail after you leave?', a: 'Call us and we\'ll come back. That\'s the promise.' },
+  { q: 'Do you leave a dumpster on my driveway?', a: 'Debris gets hauled away as part of the job — we don\'t leave a bin sitting in your driveway for days after we\'re done.' },
+  common.home,
+];
+---
+<Base
+  title="Yard-Clean Promise | Sun City Roofing Lethbridge"
+  description="Our Yard-Clean Promise: magnetic nail sweep, full debris haul-away and a final walkthrough on every Lethbridge roofing job. Safe for kids and pets."
+  breadcrumbs={[{ name: 'Yard-Clean Promise', path: '/yard-clean-promise/' }]}
+  schema={[faqSchema(faqs)]}
+>
+  <PageHeader h1="The Yard-Clean Promise" intro="A new roof shouldn't come with nails in your lawn. Every Sun City Roofing job ends the same way: a magnetic nail sweep, every scrap hauled away, and a walkthrough with you before we leave." />
+  <YardClean full />
+  <section class="section bg-gray-50">
+    <div class="container-x"><ProjectStrip services={['cleanup']} icon="broom" heading="Cleanup photos" /></div>
+  </section>
+  <Faq faqs={faqs} />
+  <CtaBand />
+</Base>

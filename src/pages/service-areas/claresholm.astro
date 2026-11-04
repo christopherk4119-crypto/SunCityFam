@@ -1,0 +1,43 @@
+---
+import TownPage from '../../layouts/TownPage.astro';
+import { business } from '../../config/business';
+import { common } from '../../data/faqs';
+const faqs = [
+  { q: 'Do you really come out to Claresholm from Lethbridge?', a: 'Yes. We\'ve completed roofing jobs in Claresholm and we\'re happy to come back. Call to book a free inspection and quote.' },
+  { q: 'What shingle holds up best to Claresholm wind?', a: 'For most homes, an architectural laminate shingle. It\'s heavier and has a much higher wind rating than basic 3-tab. Metal is another option if you want a long-term roof.' },
+  common.insurance,
+  common.timeline,
+  common.cleanup,
+];
+---
+<TownPage
+  town="Claresholm" slug="claresholm"
+  title="Roofing Claresholm AB | Sun City Roofing"
+  description="Roofing in Claresholm, AB: wind & hail damage, roof replacement, repairs and metal. Free written quotes, we beat any estimate. Call (403) 929-5588."
+  h1="Roofing in Claresholm, Alberta"
+  intro="Roof replacements, wind and hail damage repairs and metal roofing for Claresholm homes — with free written quotes and a spotless yard."
+  faqs={faqs}
+>
+  {/* TODO: add a Claresholm-specific detail from a real job (what was done, house type) once the owner confirms */}
+  <p>Claresholm is about an hour's drive from our base in Lethbridge, up Highway 2. We've completed roofing jobs there, and we're happy to make the trip. You get the same thing a Lethbridge homeowner gets: a free inspection, a detailed written quote, and our Yard-Clean Promise when the job is done.</p>
+
+  <h2>Built for Highway 2 wind</h2>
+  <p>Anyone who's lived in Claresholm knows the wind. With the Porcupine Hills to the west and open prairie all around, Chinook gusts come through hard, and older shingle roofs pay for it. Lifted tabs, broken seal strips and shingles in the ditch after a big blow are common.</p>
+  <p>For most Claresholm homes, we recommend <a href="/architectural-shingles/">architectural laminate shingles</a> — heavier, better sealed and rated for much higher wind speeds than 3-tab. <a href="/metal-roofing-lethbridge/">Metal roofing</a> is also worth pricing if you're planning to stay long-term, especially on garages, shops and acreage buildings.</p>
+
+  <h2>Roofing services in Claresholm</h2>
+  <ul>
+    <li><a href="/roof-replacement-lethbridge/">Roof replacement</a> with IKO shingles</li>
+    <li><a href="/roof-repair-lethbridge/">Wind damage and leak repairs</a></li>
+    <li><a href="/hail-damage-roof-repair-lethbridge/">Hail damage and insurance claims</a></li>
+    <li><a href="/cedar-shake-removal/">Cedar shake removal</a> and OSB re-sheeting</li>
+    <li><a href="/metal-roofing-lethbridge/">Metal roofing and open metal valleys</a></li>
+    <li><a href="/gutters-lethbridge/">Eavestroughs</a></li>
+  </ul>
+
+  <h2>Out-of-town jobs, handled properly</h2>
+  <p>Because we're travelling, we plan Claresholm jobs carefully: materials ordered and delivered ahead of time, a clear schedule in your quote and the full cleanup before we head home. If we're coming out for one job, ask your neighbours if they want a quote too.</p>
+
+  <h2>Get a Claresholm roofing quote</h2>
+  <p>Call <a href={business.phone.tel} data-loc="claresholm-copy">{business.phone.display}</a> or fill in the form below and {business.owner} will call you back.</p>
+</TownPage>

@@ -1,0 +1,45 @@
+---
+import Base from '../../layouts/Base.astro';
+import PageHeader from '../../components/PageHeader.astro';
+import Icon from '../../components/Icon.astro';
+import CtaInline from '../../components/CtaInline.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import { business, serviceAreas, widerArea } from '../../config/business';
+const towns = serviceAreas.filter((t) => t.slug);
+---
+<Base
+  title="Roofing Service Areas | Sun City Roofing Lethbridge"
+  description="Sun City Roofing serves all of Lethbridge plus Coaldale, Claresholm and Southern Alberta. Free estimates on hail damage, replacements and repairs."
+  breadcrumbs={[{ name: 'Service Areas', path: '/service-areas/' }]}
+>
+  <PageHeader h1={`Roofing Service Areas: Lethbridge & ${widerArea}`} intro={`Lethbridge is home base and where most of our work is. We also roof in Coaldale, Claresholm and across ${widerArea}.`} />
+
+  <section class="section !pt-4 bg-white">
+    <div class="container-x grid gap-10 lg:grid-cols-[3fr_2fr]">
+      <div class="prose-roof">
+        <h2>All of Lethbridge</h2>
+        <p>We roof in every part of the city — no neighbourhood is too far. That includes West Lethbridge (Copperwood, Riverstone, The Crossings, Garry Station, Varsity Village, Indian Battle Heights), North Lethbridge (Uplands, Legacy Ridge, Staffordville, Westminster) and South Lethbridge (Lakeview, London Road, Agnes Davidson, Tudor Estates, the Henderson Lake area) — and everywhere in between.</p>
+        <p>Newer subdivisions and the older neighbourhoods around downtown come with different roofs — from builder-grade shingles a few winters old to original 3-tab, cedar shakes and roofs with more than one layer. We handle all of it.</p>
+
+        <h2>Nearby towns</h2>
+        <ul>
+          {towns.map((t) => <li><a href={`/service-areas/${t.slug}/`}>Roofing in {t.name}</a></li>)}
+        </ul>
+
+        <h2>The rest of {widerArea}</h2>
+        <p>We'll travel for the right job across {widerArea} — houses, acreages and cabins. Not sure if you're in range? Call <a href={business.phone.tel} data-loc="areas-copy">{business.phone.display}</a> and ask. If we can't do it, we'll tell you straight.</p>
+      </div>
+      <aside class="h-fit rounded-xl border border-gray-200 bg-gray-50 p-6">
+        <h2 class="mb-4 text-2xl">Where we work</h2>
+        <ul class="space-y-3">
+          <li class="flex items-center gap-2 font-semibold text-ink"><Icon name="pin" class="h-5 w-5 text-red" />Lethbridge (home base)</li>
+          {towns.map((t) => <li><a href={`/service-areas/${t.slug}/`} class="flex items-center gap-2 font-semibold text-ink"><Icon name="pin" class="h-5 w-5 text-red" />{t.name}</a></li>)}
+          <li class="flex items-center gap-2 font-semibold text-ink"><Icon name="pin" class="h-5 w-5 text-red" />{widerArea} — call to confirm</li>
+        </ul>
+        <a href={business.phone.tel} data-loc="areas-aside" class="btn btn-red mt-6 w-full">Call {business.phone.display}</a>
+      </aside>
+    </div>
+  </section>
+  <CtaInline />
+  <CtaBand />
+</Base>

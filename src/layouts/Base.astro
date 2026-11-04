@@ -1,0 +1,125 @@
+---
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import MobileCallBar from '../components/MobileCallBar.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import { business } from '../config/business';
+import { businessSchema, breadcrumbSchema } from '../lib/schema';
+
+interface Props {
+  title: string; // ≤ 60 chars, "Primary Keyword | Sun City Roofing"
+  description: string; // ≤ 155 chars
+  ogImage?: string;
+  noindex?: boolean;
+  breadcrumbs?: { name: string; path: string }[];
+  schema?: Record<string, unknown>[]; // extra JSON-LD nodes (Service, FAQPage, ImageObject…)
+  businessReviews?: { author: string; quote: string }[];
+  preloadImage?: string;
+}
+
+const {
+  title,
+  description,
+  ogImage = '/og-default.png',
+  noindex = false,
+  breadcrumbs,
+  schema = [],
+  businessReviews,
+  preloadImage,
+} = Astro.props;
+
+if (import.meta.env.DEV) {
+  if (title.length > 60) console.warn(`[seo] title > 60 chars (${title.length}): ${title}`);
+  if (description.length > 155) console.warn(`[seo] description > 155 chars (${description.length}): ${title}`);
+}
+
+const canonical = new URL(Astro.url.pathname, Astro.site).href;
+const ogUrl = new URL(ogImage, Astro.site).href;
+const crumbs = breadcrumbs ? [{ name: 'Home', path: '/' }, ...breadcrumbs] : null;
+
+const graph = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    businessSchema({ includeReviews: businessReviews }),
+    { '@type': 'WebSite', '@id': `${business.url}/#website`, url: `${business.url}/`, name: business.name },
+    ...(crumbs ? [breadcrumbSchema(crumbs)] : []),
+    ...schema,
+  ],
+};
+const ga = business.ga4Id;
+---
+
+<!doctype html>
+<html lang="en-CA">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    {noindex && <meta name="robots" content="noindex, follow" />}
+    <meta name="theme-color" content="#DC2626" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+
+    <link rel="preload" href="/fonts/outfit.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/inter.woff2" as="font" type="font/woff2" crossorigin />
+    {preloadImage && <link rel="preload" as="image" href={preloadImage} fetchpriority="high" />}
+
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en_CA" />
+    <meta property="og:site_name" content={business.name} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogUrl} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogUrl} />
+
+    <script type="application/ld+json" set:html={JSON.stringify(graph)} />
+
+    {
+      ga && (
+        <>
+          <script async src={`https://www.googletagmanager.com/gtag/js?id=${ga}`} />
+          <script is:inline define:vars={{ ga }}>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            window.gtag = gtag;
+            gtag('js', new Date());
+            gtag('config', ga);
+          </script>
+        </>
+      )
+    }
+  </head>
+  <body class="pb-20 md:pb-0">
+    <a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-[100] focus:rounded focus:bg-white focus:px-4 focus:py-2">Skip to content</a>
+    <Header />
+    {crumbs && <Breadcrumbs items={crumbs} />}
+    <main id="main">
+      <slot />
+    </main>
+    <Footer />
+    <MobileCallBar />
+
+    <script is:inline>
+      // GA4: track every tel:/sms: click as an event (no-op until GA4 ID is set)
+      document.addEventListener('click', function (e) {
+        var a = e.target && e.target.closest ? e.target.closest('a[href^="tel:"],a[href^="sms:"]') : null;
+        if (!a || typeof window.gtag !== 'function') return;
+        var isSms = a.getAttribute('href').indexOf('sms:') === 0;
+        window.gtag('event', isSms ? 'sms_click' : 'phone_call_click', {
+          link_location: a.getAttribute('data-loc') || 'unknown',
+          page_path: location.pathname,
+        });
+      });
+    </script>
+  </body>
+</html>

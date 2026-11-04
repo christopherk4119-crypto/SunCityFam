@@ -1,0 +1,34 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHeader from '../components/PageHeader.astro';
+import Faq from '../components/Faq.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { common } from '../data/faqs';
+import { faqSchema } from '../lib/schema';
+import { business } from '../config/business';
+const faqs = [
+  common.cost,
+  common.quote,
+  common.bestPrice,
+  common.insurance,
+  { q: 'Will you waive my insurance deductible?', a: 'No. Your deductible is part of your policy and you pay it. Any roofer offering to cover it is either inflating the claim or cutting corners on your roof.' },
+  common.timeline,
+  common.winter,
+  common.warranty,
+  common.home,
+  common.cleanup,
+  { q: 'What shingles do you install?', a: `We install ${business.shingleBrand} shingles, mostly architectural laminate lines. Recent jobs used ${business.shingleColours.join(', ')}. ${business.owner} brings samples to your house.` },
+  { q: 'What areas do you serve?', a: 'All of Lethbridge, plus Coaldale, Claresholm and across Southern Alberta. Call to confirm if you\'re further out.' },
+  { q: 'How long have you been roofing?', a: `${business.owner} has ${business.experienceCopy}. Sun City Roofing was founded in ${business.founded}.` },
+];
+---
+<Base
+  title="Roofing FAQ Lethbridge | Sun City Roofing"
+  description="Answers to common roofing questions in Lethbridge: cost, timelines, winter roofing, hail insurance claims, warranty and cleanup. Call (403) 929-5588."
+  breadcrumbs={[{ name: 'FAQ', path: '/faq/' }]}
+  schema={[faqSchema(faqs)]}
+>
+  <PageHeader h1="Roofing Questions, Answered" intro="Straight answers to what Lethbridge homeowners ask us most. Don't see yours? Call and ask." />
+  <Faq faqs={faqs} title="Lethbridge Roofing FAQ" />
+  <CtaBand />
+</Base>

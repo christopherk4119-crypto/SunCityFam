@@ -1,0 +1,44 @@
+---
+import TownPage from '../../layouts/TownPage.astro';
+import { business } from '../../config/business';
+import { common } from '../../data/faqs';
+const faqs = [
+  { q: 'Do you charge extra to come out to Coaldale?', a: 'No. Coaldale is a short drive from our base in Lethbridge, and the inspection and quote are free, same as in town.' },
+  { q: 'Do you handle hail claims in Coaldale?', a: 'Yes. We inspect, photograph the damage, provide a written estimate and can meet your adjuster. Your insurer decides what\'s covered.' },
+  common.quote,
+  common.winter,
+  common.cleanup,
+];
+---
+<TownPage
+  town="Coaldale" slug="coaldale"
+  title="Roofer Coaldale AB | Sun City Roofing"
+  description="Roofer in Coaldale, AB for hail damage, roof replacement and repairs. Local Lethbridge crew, free written quotes, clean yard. Call (403) 929-5588."
+  h1="Roofer in Coaldale, Alberta"
+  intro="Hail damage, roof replacements and repairs for Coaldale homeowners — from a local crew based just down Highway 3 in Lethbridge."
+  faqs={faqs}
+>
+  {/* TODO: add a Coaldale-specific detail from a real job (street area, house type, what was done) once the owner confirms */}
+  <p>Coaldale is about 15 minutes east of Lethbridge on Highway 3, so for us it's close to home. We've completed roofing jobs in Coaldale, including hail damage roof replacements, and we treat a Coaldale job exactly like one in our own neighbourhood: free inspection, honest written quote and a clean yard when we leave.</p>
+
+  <h2>Coaldale roofs take the same beating as Lethbridge</h2>
+  <p>Coaldale sits out on the open prairie east of the city, with very little to slow the wind down. Chinook gusts that rip shingles off in Lethbridge hit Coaldale just as hard. Summer hail tracks across the same farmland — when a storm hits the east side of Lethbridge, Coaldale often gets it too.</p>
+  <p>That's why we recommend <a href="/architectural-shingles/">architectural shingles</a> for most Coaldale re-roofs. They're thicker, carry a much higher wind rating than 3-tab and hold up better to hail.</p>
+
+  <h2>Roofing services in Coaldale</h2>
+  <ul>
+    <li><a href="/hail-damage-roof-repair-lethbridge/">Hail damage roof replacement and insurance claims</a></li>
+    <li><a href="/roof-replacement-lethbridge/">Full roof replacement</a> with IKO shingles</li>
+    <li><a href="/roof-repair-lethbridge/">Roof repairs</a> — wind damage, leaks, missing shingles</li>
+    <li><a href="/cedar-shake-removal/">Cedar shake removal</a> and OSB re-sheeting</li>
+    <li><a href="/metal-roofing-lethbridge/">Metal roofing</a> and open metal valleys</li>
+    <li><a href="/gutters-lethbridge/">Eavestrough installation and repair</a></li>
+  </ul>
+  <p>Houses, detached garages and acreage buildings around Coaldale — call and tell us what you've got.</p>
+
+  <h2>Hail season in Coaldale</h2>
+  <p>Between June and August, check your roof after every serious storm. Dents in your eavestroughs, vents or downspouts, and granules piling up at the bottom of the downspouts, are good signs the shingles took a hit too. We'll do a free inspection and tell you honestly whether it's worth a claim.</p>
+
+  <h2>Get a Coaldale roofing quote</h2>
+  <p>Call <a href={business.phone.tel} data-loc="coaldale-copy">{business.phone.display}</a> — we answer any time. Or fill in the form below and {business.owner} will call you back.</p>
+</TownPage>

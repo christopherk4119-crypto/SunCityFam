@@ -1,0 +1,73 @@
+---
+import ServicePage from '../layouts/ServicePage.astro';
+import { business } from '../config/business';
+import { common } from '../data/faqs';
+
+const faqs = [
+  { q: 'Why do you need to put OSB down after removing cedar shakes?', a: 'Cedar shakes are usually installed over spaced boards (skip sheathing) with gaps between them so the wood can breathe. Asphalt shingles need a solid, continuous deck to be nailed and sealed to. Re-sheeting with OSB gives the new roof that solid base.' },
+  { q: 'How much does cedar shake removal and re-roofing cost?', a: `More than a standard asphalt-to-asphalt re-roof, because there's more tear-off, more disposal and new sheathing across the whole roof. The exact price depends on the size and pitch of your roof. You get a detailed written quote first — call ${business.phone.display}.` },
+  { q: 'Can you shingle right over cedar shakes?', a: 'No. Shakes are uneven, the boards underneath are spaced, and old wood under new shingles traps moisture. Doing it properly means removing the shakes and re-sheeting.' },
+  { q: 'Will my home insurance go down if I replace cedar shakes?', a: 'Some insurers treat wood roofs differently from asphalt or metal. Ask your insurance broker — we can give you paperwork describing the new roof once it is done.' },
+  { q: 'Is cedar shake removal messy?', a: 'It\'s the messiest kind of tear-off — lots of wood, splinters and old nails. That\'s exactly why our Yard-Clean Promise matters: magnetic nail sweep, every piece of debris hauled away, and a final walkthrough with you.' },
+  common.timeline,
+  common.winter,
+  common.home,
+];
+---
+<ServicePage
+  title="Cedar Shake Roof Replacement Lethbridge | Sun City"
+  description="Cedar shake roof removal and replacement in Lethbridge. Full tear-off, new OSB sheathing, IKO architectural shingles and a nail-free yard. Free estimate."
+  h1="Cedar Shake Roof Removal & Replacement in Lethbridge"
+  intro="Old cedar shakes cracked, curling or growing moss? We strip them off, re-sheet the roof with OSB and install a new shingle roof built for Lethbridge wind and hail."
+  crumb="Cedar Shake Removal"
+  serviceType="Cedar shake roof removal and replacement"
+  projectServices={['cedar-shake-removal']}
+  icon="shake"
+  faqs={faqs}
+  ctaText="Ready to retire your old cedar shakes?"
+>
+  <p>Cedar shake roofs look great when they're new. But after a few decades of Southern Alberta sun, wind and freeze-thaw, a lot of the cedar roofs in Lethbridge's older neighbourhoods are at the end of their life: split shakes, curled edges, bare grey wood and gaps you can see daylight through from the attic.</p>
+  <p>Most homeowners we talk to don't want to put cedar back on. They want something that lasts, costs less to maintain and holds up better in wind. That usually means removing the shakes, re-sheeting with OSB and installing <a href="/architectural-shingles/">architectural asphalt shingles</a> or <a href="/metal-roofing-lethbridge/">metal roofing</a>.</p>
+
+  <h2>Signs your cedar shake roof is done</h2>
+  <ul>
+    <li>Shakes that are split, cupped, curled or missing</li>
+    <li>Wood that has turned soft, black or crumbly</li>
+    <li>Moss, lichen or rot — especially on north-facing slopes</li>
+    <li>Daylight visible through the roof from the attic</li>
+    <li>Leaks in more than one spot</li>
+    <li>Shakes blowing off in Chinook winds</li>
+  </ul>
+  <p>Shakes can be repaired one at a time, but once a roof is losing them across every slope, you're paying to patch something that's worn out.</p>
+
+  <h2>Why cedar shake removal is a different job</h2>
+  <p>Replacing a cedar roof isn't the same as replacing an old asphalt roof. Two things make it a bigger job:</p>
+  <h3>1. The tear-off</h3>
+  <p>Cedar shakes are thick and heavy, and each one is held by its own nails. There's a lot more material to remove and haul away, and a lot more splinters and old nails falling into flower beds and grass.</p>
+  <h3>2. The deck underneath</h3>
+  <p>Most cedar roofs were installed over <strong>skip sheathing</strong> — boards spaced with gaps between them so the wood could breathe. That works for cedar, but asphalt shingles need a solid, continuous surface. So once the shakes are off, we cover the entire roof with new <strong>OSB sheathing</strong>, fastened to the rafters, before any underlayment or shingles go down.</p>
+  <p>Skipping this step — or shingling over the shakes — is how you get a lumpy roof that leaks and fails early. We don't do it.</p>
+
+  <h2>Our cedar shake replacement process</h2>
+  <ol>
+    <li><strong>Free inspection and quote.</strong> {business.owner} checks the roof and attic, and explains what the job involves and what it costs, in writing.</li>
+    <li><strong>Protect the property.</strong> Cedar tear-off creates a lot of debris, so we set up to protect landscaping and siding.</li>
+    <li><strong>Full shake removal</strong> down to the original boards.</li>
+    <li><strong>Repair or replace damaged rafters and boards</strong> where needed.</li>
+    <li><strong>New OSB sheathing</strong> across the whole roof.</li>
+    <li><strong>Ice and water protection</strong> at eaves and valleys, plus underlayment.</li>
+    <li><strong>New roof</strong> — usually IKO architectural shingles, with new vents, flashing and ridge caps. Metal is also an option.</li>
+    <li><strong>Yard-Clean Promise</strong> — magnetic nail sweep, complete debris haul-away and a final walkthrough with you.</li>
+  </ol>
+  {/* TODO: owner to confirm this process matches how he does cedar jobs */}
+
+  <h2>Cedar vs asphalt vs metal in Lethbridge</h2>
+  <p>Cedar needs regular maintenance to last in a dry, windy climate, and replacement cedar is expensive. Architectural asphalt shingles cost less, need almost no maintenance and carry a strong wind rating. Metal costs more up front but lasts a long time and sheds snow fast. {business.owner} will walk you through all three so you can choose.</p>
+
+  <h2>Cleanup matters even more on cedar jobs</h2>
+  <p>A cedar tear-off leaves more debris than any other roofing job. Our <a href="/yard-clean-promise/">Yard-Clean Promise</a> means we sweep the lawn, beds and driveway with a magnet, haul away every scrap and walk the yard with you before we leave. Safe for kids and pets the moment we're gone.</p>
+
+  <h2>Cedar shake removal across Lethbridge and area</h2>
+  <p>We do cedar shake removal and re-roofing in Lethbridge, <a href="/service-areas/coaldale/">Coaldale</a>, <a href="/service-areas/claresholm/">Claresholm</a> and across <a href="/service-areas/">Southern Alberta</a> — including cabins. See our <a href="/roof-replacement-lethbridge/">roof replacement</a> page for more on materials and pricing.</p>
+  <p>Call <a href={business.phone.tel} data-loc="cedar-copy">{business.phone.display}</a> or <a href="/get-estimate/">request a free cedar shake replacement estimate</a>.</p>
+</ServicePage>

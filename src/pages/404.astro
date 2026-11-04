@@ -1,0 +1,18 @@
+---
+import Base from '../layouts/Base.astro';
+import { business, services } from '../config/business';
+---
+<Base title="Page Not Found | Sun City Roofing" description="That page doesn't exist. Call Sun City Roofing at (403) 929-5588." noindex>
+  <section class="section bg-white">
+    <div class="container-x max-w-2xl text-center">
+      <h1 class="mb-4">That page blew off in the wind.</h1>
+      <p class="mb-8 text-lg">We couldn't find what you were looking for. The quickest way to get help is to call us — {business.hours.copy.toLowerCase().replace('call anytime. ', '')}</p>
+      <a href={business.phone.tel} data-loc="404" class="btn btn-red mb-8 !text-xl">📞 Call {business.phone.display}</a>
+      <ul class="flex flex-wrap justify-center gap-x-5 gap-y-2">
+        <li><a href="/" class="font-semibold text-red-dark">Home</a></li>
+        {services.map((s) => <li><a href={s.href} class="font-semibold text-red-dark">{s.short}</a></li>)}
+        <li><a href="/get-estimate/" class="font-semibold text-red-dark">Free Estimate</a></li>
+      </ul>
+    </div>
+  </section>
+</Base>

@@ -1,0 +1,34 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import PageHeader from '../components/PageHeader.astro';
+import ReviewCard from '../components/ReviewCard.astro';
+import RatingBadge from '../components/RatingBadge.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { business } from '../config/business';
+const reviews = (await getCollection('reviews')).sort((a, b) => a.data.order - b.data.order);
+// Only complete (non-truncated) review text goes into Review schema
+const schemaReviews = reviews.filter((r) => !r.data.truncated).map((r) => ({ author: r.data.author, quote: r.data.quote }));
+---
+<Base
+  title="Roofing Reviews Lethbridge | Sun City Roofing"
+  description="Real Google reviews from Sun City Roofing customers in Lethbridge and area: fast response, fair prices, clean job sites. Call (403) 929-5588."
+  breadcrumbs={[{ name: 'Reviews', path: '/reviews/' }]}
+  businessReviews={schemaReviews}
+>
+  <PageHeader h1="Sun City Roofing Reviews" intro="Real reviews from real customers on Google, word for word. What comes up again and again: first to respond, fast estimates, best price out of several quotes, clean job sites and roofs still holding up years later." />
+  <section class="section !pt-2 bg-white">
+    <div class="container-x">
+      <div class="mb-8"><RatingBadge /></div>
+      <div class="columns-1 gap-5 md:columns-2 lg:columns-3 [&>*]:mb-5 [&>*]:break-inside-avoid">
+        {reviews.map((r) => <ReviewCard {...r.data} />)}
+      </div>
+      <div class="mt-10 flex flex-col gap-3 sm:flex-row">
+        {business.social.googleReviewsUrl && <a href={business.social.googleReviewsUrl} target="_blank" rel="noopener" class="btn btn-outline">Read all reviews on Google</a>}
+        {business.social.googleWriteReviewUrl && <a href={business.social.googleWriteReviewUrl} target="_blank" rel="noopener" class="btn btn-red">Leave us a review</a>}
+        {/* TODO: add GBP review links in business.ts to show these buttons */}
+      </div>
+    </div>
+  </section>
+  <CtaBand title="Want to Be Our Next Happy Customer?" />
+</Base>

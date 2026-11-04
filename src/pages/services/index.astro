@@ -1,0 +1,29 @@
+---
+import Base from '../../layouts/Base.astro';
+import PageHeader from '../../components/PageHeader.astro';
+import ServiceGrid from '../../components/ServiceGrid.astro';
+import InsuranceSteps from '../../components/InsuranceSteps.astro';
+import CtaInline from '../../components/CtaInline.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import { business } from '../../config/business';
+---
+<Base
+  title="Roofing Services Lethbridge | Sun City Roofing"
+  description="Lethbridge roofing services: hail damage & insurance claims, replacement, repairs, architectural shingles, cedar shake, metal, eavestroughs. Free quote."
+  breadcrumbs={[{ name: 'Services', path: '/services/' }]}
+>
+  <PageHeader h1="Roofing Services in Lethbridge" intro={`Residential roofing done properly, from hail damage claims to full replacements. Every job starts with a free, written quote and ends with a clean yard. ${business.hours.copy}`} />
+  <section class="section !pt-4 bg-white">
+    <div class="container-x"><ServiceGrid /></div>
+  </section>
+  <CtaInline />
+  <InsuranceSteps />
+  <section class="section bg-gray-50">
+    <div class="container-x prose-roof">
+      <h2>General exterior work</h2>
+      {/* TODO: confirm scope of general exterior/renovation work (fascia? soffit? siding? small renos?) */}
+      <p>Along with roofing, we take on related exterior work. Call <a href={business.phone.tel} data-loc="services-exterior">{business.phone.display}</a> and tell us what you need. If it's not something we do well, we'll tell you.</p>
+    </div>
+  </section>
+  <CtaBand />
+</Base>

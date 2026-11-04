@@ -1,0 +1,13 @@
+---
+// Shows "★ X.X on Google · N reviews" ONLY once real numbers are set in business.ts.
+import { business } from '../config/business';
+const r = business.rating;
+const href = business.social.googleReviewsUrl || '/reviews/';
+interface Props { light?: boolean }
+const { light = false } = Astro.props;
+---
+{r && (
+  <a href={href} class:list={['inline-flex items-center gap-2 font-semibold no-underline', light ? 'text-white' : 'text-ink']}>
+    <span class="text-amber-400" aria-hidden="true">★</span> {r.value.toFixed(1)} on Google · {r.count} reviews
+  </a>
+)}

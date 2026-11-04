@@ -1,0 +1,13 @@
+---
+import { getCollection } from 'astro:content';
+import ReviewCard from './ReviewCard.astro';
+interface Props { placement: 'hero' | 'pricing' | 'speed' | 'cleanup' | 'longevity' | 'quality'; limit?: number; cols?: string; exclude?: string[] }
+const { placement, limit = 3, cols = 'md:grid-cols-3', exclude = [] } = Astro.props;
+const all = (await getCollection('reviews')).sort((a, b) => a.data.order - b.data.order);
+const list = all.filter((r) => r.data.placements.includes(placement) && !exclude.includes(r.id)).slice(0, limit);
+---
+{list.length > 0 && (
+  <div class:list={['grid gap-5', list.length > 1 && (list.length === 2 ? 'md:grid-cols-2' : cols)]}>
+    {list.map((r) => <ReviewCard {...r.data} />)}
+  </div>
+)}
