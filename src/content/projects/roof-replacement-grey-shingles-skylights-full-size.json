@@ -4,5 +4,6 @@
   "caption": "Roof replacement · grey shingles with two skylights",
   "service": "roof-replacement",
   "shotType": "after",
-  "featured": true
+  "featured": true,
+  "heroFor": "/hail-damage-roof-repair-lethbridge/"
 }
