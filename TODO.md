@@ -10,7 +10,7 @@ Most fixes are a single value in `src/config/business.ts`.
 
 | # | Item | Where | Notes |
 |---|------|-------|-------|
-| 1 | **Real job photos** | `/photos-raw/` → see "Photos" below | The site has **zero** real photos right now. Every service card, service hero, gallery and the home hero show branded placeholders. This is the single biggest gap: real photos are the proof. |
+| 1 | **Photos for hail, cedar, metal, gutters** | see "Photos" below | 20 real photos are live (roof replacement, repair, exterior renovation). **Hail damage — the #1 service — still has no photo**, nor do cedar shake, metal and gutters. Those pages show branded placeholders. |
 | 2 | **Licensed & insured** | `business.ts` → `licensedInsured`, `licensedInsuredDetail` | Currently `false`, so "Licensed & Insured" is **hidden everywhere**. Flip to `true` only when WCB Alberta clearance + liability coverage can be shown. |
 | 3 | **Netlify form notifications** | Netlify dashboard → Forms → Form notifications | Send to **suncityroofing123@gmail.com**. Then submit a real test from the live site and confirm the email arrives (it can't be tested before deploy). |
 | 4 | **Owner copy review** | All service pages | The service pages describe a process: tear-off to deck, ice & water at eaves/valleys, protecting landscaping, OSB re-sheeting on cedar, delivery planning on out-of-town jobs. That's standard good practice, but **Chris must confirm it matches what he actually does.** Don't publish process claims that aren't true. |
@@ -24,7 +24,7 @@ Most fixes are a single value in `src/config/business.ts`.
 - [ ] **Typical timeline** ("most houses done in a day or two"). (`faqs.ts → timeline`)
 - [ ] **"Same-day quotes often available".** True?
 - [ ] **"Call anytime. We answer."** This is backed by the 24-hour GBP listing. Make sure the phone really is answered at night, because the site now promises it in many places. I deliberately did **not** use "usually within 2 hours" because it's an unverified number.
-- [ ] **General exterior/renovation scope.** (`services/index.astro`)
+- [ ] **Exterior renovation scope.** Photos + his banner prove siding/house wrap. Anything else? Soffit, fascia, windows? (`services/index.astro#exterior`)
 - [ ] **Metal roofing scope.** Full roofs, or valleys/garages only? Panel types? (`metal-roofing-lethbridge.astro`)
 - [ ] **Gutter scope.** Seamless? Materials? (`gutters-lethbridge.astro`)
 - [ ] **Chris's bio.** He should rewrite it in his own words. (`MeetChris.astro`)
@@ -34,9 +34,8 @@ Most fixes are a single value in `src/config/business.ts`.
 - [ ] *(Optional, owner chose to skip for now)* Google review links + live rating/count (`business.ts → googleReviewsUrl`, `googleWriteReviewUrl`, `rating`). Buttons and stars stay hidden until set.
 - [ ] **Set up Google Search Console** after launch (free, ~10 min): verify the domain, submit `/sitemap-index.xml`. Without it you're blind to what Google indexes.
 
-- [ ] **Photo of Chris** on a job site (`MeetChris.astro`)
-- [ ] **Real logo file** (SVG preferred). `Logo.astro`, `public/favicon.svg`, `public/logo.png` and `public/apple-touch-icon.png` are placeholder recreations.
-- [ ] **Default share image.** `public/og-default.png` is a branded text card. Replace it with the best job photo + logo (1200×630).
+- [ ] **Photo of Chris** on a job site (`MeetChris.astro`, currently shows the branded hoodie)
+- [ ] **High-res logo file** (SVG or large PNG). The real logo is in use, but cropped from the Facebook banner at only 227×269px, so it's soft on big screens. The supplied `sun-city-roofing-logo.png` was a screenshot with a Facebook carousel arrow over the "S", so it couldn't be used.
 - [ ] **Full text of truncated reviews.** Steven W. and Nick B. (`src/content/reviews/*.md`). Copy it verbatim from Google and set `truncated: false`. Truncated reviews are left out of Review schema until then.
 - [ ] **GA4 measurement ID** (`business.ts → ga4Id`). Once it's set, the site tracks `phone_call_click`, `sms_click` and `generate_lead` (thank-you page). Mark `generate_lead` and `phone_call_click` as **key events** in GA4.
 - [ ] **Coaldale / Claresholm.** Add one specific real-job detail to each page (`service-areas/*.astro`).
@@ -61,23 +60,29 @@ To add a town (e.g. Taber, Picture Butte, Fort Macleod, Raymond, Crowsnest Pass)
 
 ---
 
-## 📸 Photos needed
+## 📸 Photos: what's in and what's not
 
-No photos were supplied (there's no `/photos-raw/` folder yet). Workflow:
+**In (20):** see `src/content/projects/`. Every town is still UNKNOWN, so captions are generic ("Roof replacement · grey architectural shingles"). **Tell me the town for any of these jobs and I'll add it to the caption and the town page.** That's free local SEO.
 
-1. Owner puts photos in `/photos-raw/<job-folder>/`, with the folder name stating the facts, e.g. `coaldale-hail-replacement-iko-charcoal-grey/`. Loose photos go in `/photos-raw/unsorted/`. **`photos-raw/` is git-ignored on purpose**, because phone photos carry the GPS location of customers' homes.
-2. Claude Code builds `photos-manifest.csv` (columns as in the original brief) and **stops for owner approval**.
-3. Approved photos are renamed (`hail-damage-roof-replacement-coaldale-charcoal-grey.jpg`), copied to `src/assets/projects/`, and get one JSON file each in `src/content/projects/` (see README). Astro's image pipeline outputs WebP at 1600px and 800px and **strips all EXIF/GPS** (verified).
-4. Flag and blur/skip any photo showing a readable house number, licence plate or face.
+**Skipped on purpose:**
+- `light-grey-ridge-cap`: worker's face
+- `manufactured-home-snow-slush`, `grey-hip-ridge-street-view`: another company's branded van in the shot
+- `dark-grey-skylight-roof-vents`: finger + pink packaging on the roof
+- `grey-shingles-skylights` (low-res copy), `frost-ridge-vents`, `snow-crew`: duplicates / too small
 
-**Shot list (minimum to launch):**
+**Not used and shouldn't be, anywhere:**
+- `certified-badge`: "CERTIFIED" by whom? No certifying body is named. A badge like that reads as a credential he doesn't have. Take it off the Facebook banner too.
+- `sun-city-roofing-banner`: the roof photo in it is a stock image of European steel tile roofing, not his work. Fine as a Facebook cover only if the stock photo is swapped out. Note: it says **"INSURED CONTRACTORS"**. If that's true, get the proof and flip `licensedInsured` (item 2 above).
+
+## 📸 Photos still needed
+
+Same process as last time: run the photos through the other chat with the prompt, then send the zip (CSV + photos) here.
+
+**Still missing:**
 
 | Service | Needed |
 |---|---|
-| Home hero | 1 wide, bright, finished roof. Best photo you have (`"heroFor": "/"`) |
-| Hail damage | 1 close-up of hail bruising/dented vent + 1 finished replacement; a before/after pair is ideal |
-| Roof replacement | 1 finished house, street view + 1 mid-job tear-off |
-| Architectural upgrade | 1 close-up showing the dimensional shingle texture |
+| **Hail damage (top priority)** | 1 close-up of hail bruising/dented vent + 1 finished replacement; a before/after pair is ideal |
 | Cedar shake removal | 1 shakes coming off + 1 fresh OSB deck |
 | Metal / open metal valleys | 1 close-up of an open metal valley |
 | Roof repair | 1 before/after of a repaired section |

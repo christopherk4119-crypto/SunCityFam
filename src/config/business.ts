@@ -115,4 +115,5 @@ export const services = [
   { name: 'Cedar Shake Removal', short: 'Cedar Shake Removal', href: '/cedar-shake-removal/', icon: 'shake' },
   { name: 'Metal Roofing', short: 'Metal Roofing', href: '/metal-roofing-lethbridge/', icon: 'metal' },
   { name: 'Gutters & Eavestroughs', short: 'Gutters', href: '/gutters-lethbridge/', icon: 'gutter' },
+  { name: 'Exterior Renovations', short: 'Exterior Renovations', href: '/services/#exterior', icon: 'roof' },
 ] as const;

@@ -15,13 +15,13 @@ interface Props {
   breadcrumbs?: { name: string; path: string }[];
   schema?: Record<string, unknown>[]; // extra JSON-LD nodes (Service, FAQPage, ImageObject…)
   businessReviews?: { author: string; quote: string }[];
-  preloadImage?: string;
+  preloadImage?: string | { src: string; srcset?: string; sizes?: string };
 }
 
 const {
   title,
   description,
-  ogImage = '/og-default.png',
+  ogImage = '/og-default.jpg',
   noindex = false,
   breadcrumbs,
   schema = [],
@@ -60,13 +60,15 @@ const ga = business.ga4Id;
     <link rel="canonical" href={canonical} />
     {noindex && <meta name="robots" content="noindex, follow" />}
     <meta name="theme-color" content="#DC2626" />
-    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon.png" type="image/png" sizes="48x48" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="sitemap" href="/sitemap-index.xml" />
 
     <link rel="preload" href="/fonts/outfit.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="/fonts/inter.woff2" as="font" type="font/woff2" crossorigin />
-    {preloadImage && <link rel="preload" as="image" href={preloadImage} fetchpriority="high" />}
+    {preloadImage && (typeof preloadImage === 'string'
+      ? <link rel="preload" as="image" href={preloadImage} fetchpriority="high" />
+      : <link rel="preload" as="image" href={preloadImage.src} imagesrcset={preloadImage.srcset} imagesizes={preloadImage.sizes} fetchpriority="high" />)}
 
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="en_CA" />

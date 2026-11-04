@@ -17,10 +17,13 @@ const serviceLinks: Record<string, { label: string; href: string }> = {
   'roof-repair': { label: 'Roof Repair', href: '/roof-repair-lethbridge/' },
   gutters: { label: 'Gutters', href: '/gutters-lethbridge/' },
   cleanup: { label: 'Cleanup', href: '/yard-clean-promise/' },
-  crew: { label: 'Crew', href: '/why-choose-us/' },
-  other: { label: 'Other', href: '/services/' },
+  crew: { label: 'Our Crew', href: '/why-choose-us/' },
+  other: { label: 'Exterior Renovation', href: '/services/#exterior' },
 };
-const projects = await getCollection('projects');
+// Roofing first (featured on top), exterior work next, crew last
+const rank = (s: string) => (s === 'crew' ? 3 : s === 'other' ? 2 : s === 'cleanup' ? 1 : 0);
+const projects = (await getCollection('projects')).sort((a, b) =>
+  rank(a.data.service) - rank(b.data.service) || Number(b.data.featured) - Number(a.data.featured));
 const present = [...new Set(projects.map((p) => p.data.service))];
 const pairs = [...new Set(projects.map((p) => p.data.pairId).filter(Boolean))]
   .map((id) => ({
@@ -56,11 +59,11 @@ const pairs = [...new Set(projects.map((p) => p.data.pairId).filter(Boolean))]
             {present.map((s) => <button type="button" class="filter-btn rounded-full border-2 border-gray-300 bg-white px-4 py-2 font-semibold text-ink" data-filter={s} aria-pressed="false">{serviceLinks[s].label}</button>)}
           </div>
           <ul class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3" id="gallery-grid">
-            {projects.map((p) => (
+            {projects.map((p, i) => (
               <li data-service={p.data.service}>
                 <a href={serviceLinks[p.data.service].href} class="block no-underline">
                   <figure>
-                    <Image src={p.data.image} alt={p.data.alt} width={800} widths={[400, 800]} sizes="(min-width:1024px) 360px, (min-width:640px) 50vw, 100vw" class="aspect-[4/3] w-full rounded-xl object-cover" loading="lazy" />
+                    <Image src={p.data.image} alt={p.data.alt} width={800} height={600} fit="cover" widths={[400, 600, 800]} quality={50} sizes="(min-width:1024px) 360px, (min-width:640px) 50vw, 100vw" class="aspect-[4/3] w-full rounded-xl object-cover" loading={i === 0 ? 'eager' : 'lazy'} fetchpriority={i === 0 ? 'high' : undefined} />
                     <figcaption class="mt-2 text-sm font-medium text-muted">{p.data.caption}</figcaption>
                   </figure>
                 </a>

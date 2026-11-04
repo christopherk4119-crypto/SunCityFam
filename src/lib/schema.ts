@@ -16,7 +16,7 @@ export function businessSchema(opts: { includeReviews?: { author: string; quote:
     foundingDate: String(B.founded),
     priceRange: '$$',
     logo: `${B.url}/logo.png`,
-    image: `${B.url}/og-default.png`,
+    image: `${B.url}/og-default.jpg`,
     address: {
       '@type': 'PostalAddress',
       streetAddress: B.address.street,

@@ -29,7 +29,10 @@ const faqs = [common.cost, common.quote, common.insurance, common.winter, common
 // Hero background: a real job photo marked heroFor: "/" in src/content/projects/
 const projects = await getCollection('projects');
 const heroPhoto = projects.find((p) => p.data.heroFor === '/');
-const heroImg = heroPhoto ? await getImage({ src: heroPhoto.data.image, width: 1600, format: 'webp' }) : null;
+const heroImg = heroPhoto
+  ? await getImage({ src: heroPhoto.data.image, width: 1600, height: 1000, fit: 'cover', widths: [480, 640, 800, 1024, 1280, 1600], format: 'webp', quality: 45 })
+  : null;
+const heroPreload = heroImg ? { src: heroImg.src, srcset: heroImg.srcSet.attribute, sizes: '100vw' } : undefined;
 const reviews = (await getCollection('reviews')).sort((a, b) => a.data.order - b.data.order);
 const heroReview = reviews.find((r) => r.data.placements.includes('hero'));
 const homeReviews = reviews.filter((r) => ['josh-b', 'mark-l'].includes(r.id));
@@ -44,12 +47,12 @@ const trust = [
   title="Roofers Lethbridge | Sun City Roofing"
   description="Lethbridge roofing company for hail damage, roof repairs and replacements. 20+ years' experience, free same-day quotes. Call (403) 929-5588."
   schema={[faqSchema(faqs)]}
-  preloadImage={heroImg?.src}
+  preloadImage={heroPreload}
 >
   <!-- HERO -->
   <section class="relative overflow-hidden bg-ink text-white">
     {heroImg && heroPhoto
-      ? <img src={heroImg.src} alt={heroPhoto.data.alt} width={heroImg.attributes.width ?? 1600} height={heroImg.attributes.height ?? 1067} fetchpriority="high" loading="eager" decoding="async" class="absolute inset-0 h-full w-full object-cover opacity-40" />
+      ? <img src={heroImg.src} srcset={heroImg.srcSet.attribute} sizes="100vw" alt={heroPhoto.data.alt} width={1600} height={1000} fetchpriority="high" loading="eager" decoding="async" class="absolute inset-0 h-full w-full object-cover" /><div class="absolute inset-0 bg-gradient-to-b from-ink/80 via-ink/75 to-ink/90" aria-hidden="true"></div>
       : <div class="absolute inset-0 bg-[radial-gradient(circle_at_85%_20%,rgba(220,38,38,0.35),transparent_55%)]" aria-hidden="true">{/* TODO: real job photo as hero background (set heroFor: "/") */}</div>}
     <div class="container-x relative grid gap-10 py-12 sm:py-16 lg:grid-cols-[3fr_2fr] lg:items-center lg:py-20">
       <div>
@@ -139,7 +142,7 @@ const trust = [
         <div><p class="eyebrow">Real jobs, real roofs</p><h2>Recent Roofing Projects</h2></div>
         <a href="/gallery/" class="font-heading font-bold text-red-dark">View the full gallery →</a>
       </div>
-      <ProjectStrip featuredOnly limit={6} />
+      <ProjectStrip featuredOnly limit={6} excludeHeroFor="/" />
     </div>
   </section>
 

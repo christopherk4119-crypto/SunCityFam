@@ -111,6 +111,7 @@ public/_redirects, robots.txt, fonts/ (self-hosted Outfit + Inter, OFL)
 
 ## Quality bar (checked at build time)
 
-- Lighthouse mobile: 100 / 100 / 100 / 100 on every page tested, LCP ≈ 1s, CLS 0. **Measured with placeholders.** Real photos add weight; re-run after adding them.
+- Lighthouse mobile **with real photos**: performance 96–100, accessibility/best practices/SEO 100 on every page tested; CLS 0. LCP 2.0–2.9s under Lighthouse's simulated slow 4G (photo-heavy pages like the gallery are the slowest).
+- Photos are cropped to their display shape (4:3 cards, 4:3 service heroes, 16:10 home hero) at build time, served as responsive WebP at quality 45–60, and only the hero is preloaded.
 - One H1 per page, titles ≤ 60 chars, descriptions ≤ 155 chars (the dev server warns when they're over).
 - No horizontal scroll at phone width.

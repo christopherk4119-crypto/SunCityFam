@@ -1,11 +1,16 @@
 ---
+import { Image } from 'astro:assets';
+import { getEntry } from 'astro:content';
 import PhotoPlaceholder from './PhotoPlaceholder.astro';
+const crew = await getEntry('projects', 'crew-sun-city-roofing-branded-hoodie');
 import { business } from '../config/business';
 ---
 <section class="section bg-gray-50">
   <div class="container-x grid items-center gap-10 md:grid-cols-[2fr_3fr]">
     {/* TODO: replace with a real photo of Chris (on a job site, not a headshot in a suit) */}
-    <PhotoPlaceholder icon="handshake" label="Photo of Chris coming soon" aspect="aspect-square" class="mx-auto max-w-sm" />
+    {crew
+      ? <Image src={crew.data.image} alt={crew.data.alt} width={600} height={600} fit="cover" widths={[400, 600]} quality={60} sizes="(min-width:768px) 380px, 90vw" class="mx-auto aspect-square w-full max-w-sm rounded-xl object-cover" loading="lazy" />
+      : <PhotoPlaceholder icon="handshake" label="Photo of Chris coming soon" aspect="aspect-square" class="mx-auto max-w-sm" />}
     <div>
       <p class="eyebrow">Meet your roofer</p>
       <h2 class="mb-4">Hi, I'm {business.owner}.</h2>

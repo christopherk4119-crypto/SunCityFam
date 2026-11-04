@@ -6,6 +6,11 @@ import InsuranceSteps from '../../components/InsuranceSteps.astro';
 import CtaInline from '../../components/CtaInline.astro';
 import CtaBand from '../../components/CtaBand.astro';
 import { business } from '../../config/business';
+import { Image } from 'astro:assets';
+import { getEntry } from 'astro:content';
+const before = await getEntry('projects', 'other-siding-replacement-old-cedar-before');
+const after = await getEntry('projects', 'other-siding-replacement-green-vinyl-after');
+const wrap = await getEntry('projects', 'other-house-wrap-bungalow-exterior-renovation');
 ---
 <Base
   title="Roofing Services Lethbridge | Sun City Roofing"
@@ -14,15 +19,32 @@ import { business } from '../../config/business';
 >
   <PageHeader h1="Roofing Services in Lethbridge" intro={`Residential roofing done properly, from hail damage claims to full replacements. Every job starts with a free, written quote and ends with a clean yard. ${business.hours.copy}`} />
   <section class="section !pt-4 bg-white">
-    <div class="container-x"><ServiceGrid /></div>
+    <div class="container-x"><h2 class="sr-only">All roofing services</h2><ServiceGrid /></div>
   </section>
   <CtaInline />
   <InsuranceSteps />
-  <section class="section bg-gray-50">
-    <div class="container-x prose-roof">
-      <h2>General exterior work</h2>
-      {/* TODO: confirm scope of general exterior/renovation work (fascia? soffit? siding? small renos?) */}
-      <p>Along with roofing, we take on related exterior work. Call <a href={business.phone.tel} data-loc="services-exterior">{business.phone.display}</a> and tell us what you need. If it's not something we do well, we'll tell you.</p>
+  <section id="exterior" class="section bg-gray-50">
+    <div class="container-x">
+      <p class="eyebrow">Beyond the roof</p>
+      <h2 class="mb-4">Exterior Renovations</h2>
+      {/* TODO: confirm full exterior scope with Chris (siding types? soffit/fascia? windows?) */}
+      <p class="mb-8 max-w-3xl text-lg">Along with roofing, we take on exterior renovation work: tearing off old siding, new house wrap, and new vinyl siding. Same approach as our roofs: a written quote, done properly, and a clean site when we leave. Call <a href={business.phone.tel} data-loc="services-exterior" class="font-semibold text-red-dark">{business.phone.display}</a> and tell us what you need.</p>
+      {before && after && (
+        <div class="mb-6 grid gap-5 sm:grid-cols-2">
+          {[before, after].map((p) => (
+            <figure>
+              <Image src={p.data.image} alt={p.data.alt} width={800} height={600} fit="cover" widths={[400, 600, 800]} quality={50} sizes="(min-width:640px) 50vw, 100vw" class="aspect-[4/3] w-full rounded-xl object-cover" loading="lazy" />
+              <figcaption class="mt-2 text-sm font-medium text-muted">{p.data.caption}</figcaption>
+            </figure>
+          ))}
+        </div>
+      )}
+      {wrap && (
+        <figure class="max-w-xl">
+          <Image src={wrap.data.image} alt={wrap.data.alt} width={800} height={600} fit="cover" widths={[400, 600, 800]} quality={50} sizes="(min-width:640px) 576px, 100vw" class="aspect-[4/3] w-full rounded-xl object-cover" loading="lazy" />
+          <figcaption class="mt-2 text-sm font-medium text-muted">{wrap.data.caption}</figcaption>
+        </figure>
+      )}
     </div>
   </section>
   <CtaBand />

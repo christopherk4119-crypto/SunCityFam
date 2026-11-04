@@ -1,15 +1,11 @@
 ---
-// TODO: replace with the real Sun City Roofing logo file (SVG preferred) when supplied.
-interface Props { class?: string; light?: boolean }
-const { class: cls = 'h-10 w-auto', light = false } = Astro.props;
-const text = light ? '#ffffff' : '#111827';
+// Real Sun City Roofing logo, cropped clean from the Facebook banner (227×269).
+// TODO: ask Chris for the original high-res / vector logo and replace this file.
+import { Image } from 'astro:assets';
+import logo from '../assets/brand/sun-city-roofing-logo.png';
+interface Props { class?: string; light?: boolean; eager?: boolean }
+const { class: cls = 'h-12 w-auto', light = false, eager = true } = Astro.props;
 ---
-<svg class={cls} viewBox="0 0 220 48" role="img" aria-label="Sun City Roofing — home">
-  <circle cx="24" cy="22" r="9" fill="#DC2626" />
-  <g stroke="#DC2626" stroke-width="2.5" stroke-linecap="round">
-    <line x1="24" y1="4" x2="24" y2="8" /><line x1="9" y1="10" x2="12" y2="13" /><line x1="39" y1="10" x2="36" y2="13" />
-  </g>
-  <path d="M4 40 L24 26 L44 40" fill="none" stroke={text} stroke-width="4" stroke-linejoin="round" stroke-linecap="round" />
-  <text x="54" y="24" font-family="Outfit, sans-serif" font-weight="800" font-size="20" fill={text}>SUN CITY</text>
-  <text x="54" y="42" font-family="Outfit, sans-serif" font-weight="700" font-size="14" letter-spacing="3.2" fill="#DC2626">ROOFING</text>
-</svg>
+{light
+  ? <span class="inline-block rounded-lg bg-white p-2"><Image src={logo} alt="Sun City Roofing" height={96} densities={[1, 2]} class={cls} loading="lazy" /></span>
+  : <Image src={logo} alt="Sun City Roofing — home" height={64} densities={[1, 2]} class={cls} loading={eager ? 'eager' : 'lazy'} />}

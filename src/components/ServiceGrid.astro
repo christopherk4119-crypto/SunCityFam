@@ -14,6 +14,7 @@ const serviceMap: Record<string, string[]> = {
   '/cedar-shake-removal/': ['cedar-shake-removal'],
   '/metal-roofing-lethbridge/': ['metal-roofing', 'open-metal-valleys'],
   '/gutters-lethbridge/': ['gutters'],
+  '/services/#exterior': ['other'],
 };
 const blurbs: Record<string, string> = {
   '/hail-damage-roof-repair-lethbridge/': 'Free hail inspections, photo documentation and help with your insurance adjuster.',
@@ -23,6 +24,7 @@ const blurbs: Record<string, string> = {
   '/cedar-shake-removal/': 'Old cedar shakes off, new OSB sheeting down, ready for a modern shingle roof.',
   '/metal-roofing-lethbridge/': 'Metal roofing and open metal valleys that shed water and snow fast.',
   '/gutters-lethbridge/': 'Eavestrough install, repair and cleaning to keep water off your foundation.',
+  '/services/#exterior': 'Old siding off, new house wrap and new vinyl siding — done properly, with a clean site.',
 };
 const projects = await getCollection('projects');
 const exclude = Astro.props.exclude as string | undefined;
@@ -30,12 +32,13 @@ const list = services.filter((s) => s.href !== exclude);
 ---
 <ul class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
   {list.map((s) => {
-    const photo = projects.find((p) => serviceMap[s.href]?.includes(p.data.service) && p.data.shotType !== 'before');
+    const photo = projects.find((p) => p.data.heroFor === s.href)
+      ?? projects.find((p) => serviceMap[s.href]?.includes(p.data.service) && p.data.shotType !== 'before' && !p.data.heroFor);
     return (
       <li>
         <a href={s.href} class="group flex h-full flex-col overflow-hidden rounded-xl border border-gray-200 bg-white no-underline shadow-sm transition hover:-translate-y-0.5 hover:shadow-md">
           {photo
-            ? <Image src={photo.data.image} alt={photo.data.alt} width={800} widths={[400, 800]} sizes="(min-width:1024px) 360px, (min-width:640px) 50vw, 100vw" class="aspect-[4/3] w-full object-cover" loading="lazy" />
+            ? <Image src={photo.data.image} alt={photo.data.alt} width={800} height={600} fit="cover" widths={[400, 600, 800]} quality={50} sizes="(min-width:1024px) 360px, (min-width:640px) 50vw, 100vw" class="aspect-[4/3] w-full object-cover" loading="lazy" />
             : <PhotoPlaceholder icon={s.icon} label={`${s.short} photo coming soon`} class="!rounded-none" />}
           <div class="flex flex-1 flex-col p-5">
             <h3 class="mb-2 flex items-center gap-2 text-xl"><Icon name={s.icon} class="h-6 w-6 text-red" />{s.name}</h3>

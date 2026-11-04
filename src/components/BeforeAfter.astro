@@ -3,8 +3,8 @@ import { getImage } from 'astro:assets';
 import type { ImageMetadata } from 'astro';
 interface Props { before: ImageMetadata; after: ImageMetadata; beforeAlt: string; afterAlt: string; caption?: string }
 const { before, after, beforeAlt, afterAlt, caption } = Astro.props;
-const b = await getImage({ src: before, width: 1600, format: 'webp' });
-const a = await getImage({ src: after, width: 1600, format: 'webp' });
+const b = await getImage({ src: before, width: 1200, format: 'webp', quality: 60 });
+const a = await getImage({ src: after, width: 1200, format: 'webp', quality: 60 });
 const ratio = `${after.width} / ${after.height}`;
 ---
 <figure class="ba">

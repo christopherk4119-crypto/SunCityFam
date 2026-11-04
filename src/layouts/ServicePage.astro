@@ -37,7 +37,11 @@ const path = Astro.url.pathname;
 const projects = await getCollection('projects');
 const hero = projects.find((x) => x.data.heroFor === path)
   ?? projects.find((x) => p.projectServices.includes(x.data.service) && x.data.shotType !== 'before' && !x.data.heroFor);
-const heroOpt = hero ? await getImage({ src: hero.data.image, width: 1600, format: 'webp' }) : null;
+const heroSizes = '(min-width:1024px) 560px, 100vw';
+const heroOpt = hero
+  ? await getImage({ src: hero.data.image, width: 1200, height: 900, fit: 'cover', widths: [480, 640, 800, 1024, 1200], format: 'webp', quality: 50 })
+  : null;
+const heroPreload = heroOpt ? { src: heroOpt.src, srcset: heroOpt.srcSet.attribute, sizes: heroSizes } : undefined;
 
 const schema: Record<string, unknown>[] = [
   serviceSchema({ name: p.h1, description: p.description, path, serviceType: p.serviceType }),
@@ -45,7 +49,7 @@ const schema: Record<string, unknown>[] = [
 ];
 if (hero && heroOpt) schema.push(imageSchema({ url: new URL(heroOpt.src, Astro.site).href, caption: hero.data.caption }));
 ---
-<Base title={p.title} description={p.description} breadcrumbs={[{ name: 'Services', path: '/services/' }, { name: p.crumb, path }]} schema={schema} preloadImage={heroOpt?.src}>
+<Base title={p.title} description={p.description} breadcrumbs={[{ name: 'Services', path: '/services/' }, { name: p.crumb, path }]} schema={schema} preloadImage={heroPreload}>
   <section class="bg-white">
     <div class="container-x grid items-center gap-8 py-10 lg:grid-cols-2 lg:py-14">
       <div>
@@ -58,7 +62,7 @@ if (hero && heroOpt) schema.push(imageSchema({ url: new URL(heroOpt.src, Astro.s
         <p class="mt-4 text-sm font-semibold text-muted">{business.hours.copy} · Free, no-obligation quotes</p>
       </div>
       {hero
-        ? <figure><Image src={hero.data.image} alt={hero.data.alt} width={1600} widths={[800, 1600]} sizes="(min-width:1024px) 560px, 100vw" loading="eager" fetchpriority="high" class="aspect-[4/3] w-full rounded-xl object-cover shadow-lg" /><figcaption class="mt-2 text-sm font-medium text-muted">{hero.data.caption}</figcaption></figure>
+        ? <figure><img src={heroOpt!.src} srcset={heroOpt!.srcSet.attribute} sizes={heroSizes} alt={hero.data.alt} width={1200} height={900} decoding="async" loading="eager" fetchpriority="high" class="aspect-[4/3] w-full rounded-xl object-cover shadow-lg" /><figcaption class="mt-2 text-sm font-medium text-muted">{hero.data.caption}</figcaption></figure>
         : <PhotoPlaceholder icon={p.icon} label={`${p.crumb} photo coming soon`} />}
     </div>
   </section>
