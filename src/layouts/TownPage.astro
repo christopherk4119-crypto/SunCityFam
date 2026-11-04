@@ -8,8 +8,12 @@ import CtaInline from '../components/CtaInline.astro';
 import CtaBand from '../components/CtaBand.astro';
 import EstimateForm from '../components/EstimateForm.astro';
 import { faqSchema } from '../lib/schema';
+import { getCollection } from 'astro:content';
 interface Props { town: string; slug: string; title: string; description: string; h1: string; intro: string; faqs: { q: string; a: string }[] }
 const p = Astro.props;
+// Use photos tagged with this town if there are any; otherwise show recent regional
+// roofing jobs under a heading that doesn't claim which town each one is in.
+const townPhotos = (await getCollection('projects')).filter((x) => x.data.town?.toLowerCase() === p.town.toLowerCase());
 ---
 <Base title={p.title} description={p.description} breadcrumbs={[{ name: 'Service Areas', path: '/service-areas/' }, { name: p.town, path: `/service-areas/${p.slug}/` }]} schema={[faqSchema(p.faqs)]}>
   <PageHeader h1={p.h1} intro={p.intro} eyebrow={`Roofing in ${p.town}, AB`} />
@@ -19,8 +23,12 @@ const p = Astro.props;
   <CtaInline text={`Need a roofer in ${p.town}?`} />
   <section class="section bg-white">
     <div class="container-x">
-      <!-- Only photos tagged with this town are shown here -->
-      <ProjectStrip town={p.town} heading={`Our work in ${p.town}`} />
+      {townPhotos.length > 0
+        ? <ProjectStrip town={p.town} heading={`Our work in ${p.town}`} />
+        : <>
+            <ProjectStrip services={['roof-replacement', 'roof-repair']} limit={6} heading="Recent roofing projects" />
+            <p class="mt-4 text-sm text-muted">Recent jobs from across Lethbridge, Coaldale and Claresholm. <a href="/gallery/" class="font-semibold text-red-dark">See the full gallery</a>.</p>
+          </>}
     </div>
   </section>
   <section class="section bg-gray-50">
