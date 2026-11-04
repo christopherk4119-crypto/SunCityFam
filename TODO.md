@@ -12,12 +12,8 @@ Most fixes are a single value in `src/config/business.ts`.
 |---|------|-------|-------|
 | 1 | **Real job photos** | `/photos-raw/` → see "Photos" below | The site has **zero** real photos right now. Every service card, service hero, gallery and the home hero show branded placeholders. This is the single biggest gap: real photos are the proof. |
 | 2 | **Licensed & insured** | `business.ts` → `licensedInsured`, `licensedInsuredDetail` | Currently `false`, so "Licensed & Insured" is **hidden everywhere**. Flip to `true` only when WCB Alberta clearance + liability coverage can be shown. |
-| 3 | **Google Business Profile URL** | `business.ts` → `social.googleBusinessProfile` | Adds GBP to schema `sameAs` and the map link. |
-| 4 | **Google review links** | `business.ts` → `googleReviewsUrl`, `googleWriteReviewUrl` | "Read all reviews on Google" / "Leave us a review" buttons stay hidden until set. |
-| 5 | **Live rating + review count** | `business.ts` → `rating: { value: 4.9, count: 12 }` | Set on launch day from the live GBP. While `null`, no stars are shown and no AggregateRating schema is output. |
-| 6 | **Netlify form notifications** | Netlify dashboard → Forms → Form notifications | Send to **suncityroofing123@gmail.com**. Then submit a real test from the live site and confirm the email arrives (it can't be tested before deploy). |
-| 7 | **Old site URLs → 301s** | `public/_redirects` | I couldn't reach the live site from the build environment. Pull the old URL list (Search Console → Pages, or the old sitemap) and add a 301 for any URL that doesn't exist on the new site. |
-| 8 | **Owner copy review** | All service pages | The service pages describe a process: tear-off to deck, ice & water at eaves/valleys, protecting landscaping, OSB re-sheeting on cedar, delivery planning on out-of-town jobs. That's standard good practice, but **Chris must confirm it matches what he actually does.** Don't publish process claims that aren't true. |
+| 3 | **Netlify form notifications** | Netlify dashboard → Forms → Form notifications | Send to **suncityroofing123@gmail.com**. Then submit a real test from the live site and confirm the email arrives (it can't be tested before deploy). |
+| 4 | **Owner copy review** | All service pages | The service pages describe a process: tear-off to deck, ice & water at eaves/valleys, protecting landscaping, OSB re-sheeting on cedar, delivery planning on out-of-town jobs. That's standard good practice, but **Chris must confirm it matches what he actually does.** Don't publish process claims that aren't true. |
 
 ## 🟠 Claims to confirm (currently on the site)
 
@@ -35,11 +31,13 @@ Most fixes are a single value in `src/config/business.ts`.
 
 ## 🟡 Content gaps
 
+- [ ] *(Optional, owner chose to skip for now)* Google review links + live rating/count (`business.ts → googleReviewsUrl`, `googleWriteReviewUrl`, `rating`). Buttons and stars stay hidden until set.
+- [ ] **Set up Google Search Console** after launch (free, ~10 min): verify the domain, submit `/sitemap-index.xml`. Without it you're blind to what Google indexes.
+
 - [ ] **Photo of Chris** on a job site (`MeetChris.astro`)
 - [ ] **Real logo file** (SVG preferred). `Logo.astro`, `public/favicon.svg`, `public/logo.png` and `public/apple-touch-icon.png` are placeholder recreations.
 - [ ] **Default share image.** `public/og-default.png` is a branded text card. Replace it with the best job photo + logo (1200×630).
 - [ ] **Full text of truncated reviews.** Steven W. and Nick B. (`src/content/reviews/*.md`). Copy it verbatim from Google and set `truncated: false`. Truncated reviews are left out of Review schema until then.
-- [ ] **Exact geo coordinates** from the GBP pin (`business.ts → geo`). Left `null` on purpose; a wrong pin is worse than none.
 - [ ] **GA4 measurement ID** (`business.ts → ga4Id`). Once it's set, the site tracks `phone_call_click`, `sms_click` and `generate_lead` (thank-you page). Mark `generate_lead` and `phone_call_click` as **key events** in GA4.
 - [ ] **Coaldale / Claresholm.** Add one specific real-job detail to each page (`service-areas/*.astro`).
 - [ ] **Privacy policy.** The owner should review it, ideally with a lawyer (`privacy.astro`).

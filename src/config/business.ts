@@ -31,9 +31,8 @@ export const business = {
     country: 'CA',
   },
 
-  // TODO: confirm exact coordinates from the Google Business Profile pin.
-  // Left null on purpose — a wrong geo point is worse than none. Schema omits geo while null.
-  geo: null as null | { lat: number; lng: number },
+  // From the Google Business Profile pin
+  geo: { lat: 49.72183, lng: -112.8336 } as null | { lat: number; lng: number },
 
   // Google lists "Open 24 hours"
   hours: {
@@ -68,8 +67,8 @@ export const business = {
 
   social: {
     facebook: 'https://www.facebook.com/people/Sun-City-Roofing/61578647018627/',
-    // TODO: paste the Google Business Profile URL (maps.app.goo.gl/... or g.page/...)
-    googleBusinessProfile: '',
+    // Google Business Profile (stable CID link)
+    googleBusinessProfile: 'https://maps.google.com/?cid=4205094195851378392',
     // TODO: GBP "read reviews" link
     googleReviewsUrl: '',
     // TODO: GBP "write a review" short link (from GBP dashboard → "Ask for reviews")
