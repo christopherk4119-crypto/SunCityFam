@@ -4,5 +4,6 @@
   "caption": "Roof replacement · brown shingles, garage re-roof behind",
   "service": "roof-replacement",
   "shotType": "after",
-  "featured": true
+  "featured": true,
+  "heroFor": "/roof-replacement-lethbridge/"
 }
